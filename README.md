@@ -12,3 +12,5 @@ Develop a user-centric platform for students to find PG accommodations, hostels,
   <li>Tiffin Service Providers : Interested People having their services listed on the website.</li>
   <li>University : Collaboration with institutions will enhance user base and increase website visibility.</li>
 </ul>
+
+## How to set up the project in your own env
