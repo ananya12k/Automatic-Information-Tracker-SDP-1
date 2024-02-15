@@ -2,7 +2,7 @@ import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
 
 export default function CarouselComp() {
   return (
-    <MDBCarousel>
+    <MDBCarousel interval={6000}>
       <MDBCarouselItem itemId={1}>
         <img
           src="https://mdbootstrap.com/img/new/slides/041.jpg"

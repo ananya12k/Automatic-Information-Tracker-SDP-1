@@ -15,8 +15,13 @@ import {
   MDBBtn,
 } from "mdb-react-ui-kit";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+  const navigate = useNavigate();
+  const handleLogin = () => {
+    navigate("/login");
+  };
   const [openNavRight, setOpenNavRight] = useState(false);
 
   return (
@@ -44,7 +49,7 @@ const NavBar = () => {
         <MDBCollapse navbar show={openNavRight.toString()}>
           <MDBNavbarNav right fullWidth={false} className="mb-2 mb-lg-0">
             <MDBNavbarItem>
-              <MDBNavbarLink active aria-current="page" href="#">
+              <MDBNavbarLink active aria-current="page" href="/">
                 Home
               </MDBNavbarLink>
             </MDBNavbarItem>
@@ -54,8 +59,12 @@ const NavBar = () => {
                   PG
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
-                  <MDBDropdownItem link>Girls PG</MDBDropdownItem>
-                  <MDBDropdownItem link>Boys PG</MDBDropdownItem>
+                  <MDBDropdownItem link href="/pggirls">
+                    Girls PG
+                  </MDBDropdownItem>
+                  <MDBDropdownItem link href="/pgboys">
+                    Boys PG
+                  </MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavbarItem>
@@ -65,25 +74,35 @@ const NavBar = () => {
                   Hostel
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
-                  <MDBDropdownItem link>Girls Hostel</MDBDropdownItem>
-                  <MDBDropdownItem link>Boys Hostel</MDBDropdownItem>
+                  <MDBDropdownItem link href="/hostelgirls">
+                    Girls Hostel
+                  </MDBDropdownItem>
+                  <MDBDropdownItem link href="/hostelboys">
+                    Boys Hostel
+                  </MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink>Tiffin</MDBNavbarLink>
+              <MDBNavbarLink aria-current="page" href="/tiffin">
+                Tiffin
+              </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink>Contact Us</MDBNavbarLink>
+              <MDBNavbarLink aria-current="page" href="/contact">
+                Contact Us
+              </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink>Help</MDBNavbarLink>
+              <MDBNavbarLink aria-current="page" href="/help">
+                Help
+              </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
               <MDBNavbarLink>Search</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBBtn rounded>
+              <MDBBtn rounded onClick={handleLogin}>
                 <MDBNavbarLink>Login</MDBNavbarLink>
               </MDBBtn>
             </MDBNavbarItem>
