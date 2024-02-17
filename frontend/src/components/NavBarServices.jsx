@@ -13,7 +13,6 @@ import {
     MDBDropdownItem,
     MDBNavbarBrand,
     MDBBtn,
-    MDBInput,
     MDBInputGroup
 } from "mdb-react-ui-kit";
 import { useState } from "react";
