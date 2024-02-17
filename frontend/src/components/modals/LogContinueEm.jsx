@@ -8,9 +8,11 @@ import {
   MDBIcon,
   MDBCarousel,
   MDBInput,
+  MDBCheckbox,
   MDBCarouselItem,
 } from "mdb-react-ui-kit";
-const ForgotPassWord = ({ open, handleClose }) => {
+
+const LogContinueEm = ({ open, handleClose }) => {
   return (
     <>
       <MDBModal open={open ? true : false} onClose={handleClose} tabIndex="-1">
@@ -32,7 +34,7 @@ const ForgotPassWord = ({ open, handleClose }) => {
                   alt=""
                   loading="lazy"
                 />
-                <h3 className="mb-3">Forgot Password</h3>
+                <h3 className="mb-3">Login</h3>
 
                 <form>
                   <MDBInput
@@ -41,10 +43,52 @@ const ForgotPassWord = ({ open, handleClose }) => {
                     id="form2Example1"
                     label="Email address"
                   />
+                  <MDBInput
+                    className="mb-4"
+                    type="password"
+                    id="form2Example2"
+                    label="Password"
+                  />
+
+                  <MDBRow className="mb-4">
+                    <MDBCol className="d-flex justify-content-center">
+                      <MDBCheckbox
+                        id="form2Example3"
+                        label="Remember me"
+                        defaultChecked
+                      />
+                    </MDBCol>
+                    <MDBCol>
+                      <a href="#!">Forgot password?</a>
+                    </MDBCol>
+                  </MDBRow>
 
                   <MDBBtn type="submit" className="mb-4" block>
-                    Send Reset Link
+                    Log in
                   </MDBBtn>
+
+                  <div className="text-center">
+                    <p>
+                      Not a member? <a href="#!">Register</a>
+                    </p>
+                    <p>or sign up with:</p>
+
+                    <MDBBtn floating color="secondary" className="mx-1">
+                      <MDBIcon fab icon="facebook-f" />
+                    </MDBBtn>
+
+                    <MDBBtn floating color="secondary" className="mx-1">
+                      <MDBIcon fab icon="google" />
+                    </MDBBtn>
+
+                    <MDBBtn floating color="secondary" className="mx-1">
+                      <MDBIcon fab icon="twitter" />
+                    </MDBBtn>
+
+                    <MDBBtn floating color="secondary" className="mx-1">
+                      <MDBIcon fab icon="github" />
+                    </MDBBtn>
+                  </div>
                 </form>
               </MDBCol>
               <MDBCol
@@ -82,4 +126,4 @@ const ForgotPassWord = ({ open, handleClose }) => {
   );
 };
 
-export default ForgotPassWord;
+export default LogContinueEm;

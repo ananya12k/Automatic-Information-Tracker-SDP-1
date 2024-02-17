@@ -2,8 +2,6 @@ import {
   MDBModal,
   MDBModalDialog,
   MDBModalContent,
-  MDBModalHeader,
-  MDBModalBody,
   MDBRow,
   MDBCol,
   MDBBtn,
