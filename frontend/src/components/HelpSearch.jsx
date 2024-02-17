@@ -1,5 +1,22 @@
+import React from "react";
+import {
+  MDBCard,
+  MDBCardTitle,
+  MDBBtn,
+  MDBCardGroup,
+  MDBCardImage,
+  MDBCardText,
+  MDBCardBody
+} from "mdb-react-ui-kit";
+
 const HelpSearch = () => {
-  return <div>HelpSearch</div>;
+  return (
+    <>
+
+
+    </>
+  )
+
 };
 
 export default HelpSearch;
