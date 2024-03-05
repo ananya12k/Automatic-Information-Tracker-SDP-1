@@ -8,6 +8,8 @@ import HostelGirls from "./pages/HostelGirls";
 import TiffinSer from "./pages/TiffinSer";
 import ContactPage from "./pages/ContactPage";
 import HelpPage from "./pages/HelpPage";
+import CustomerSupport from "./pages/CustomerSupport";
+import BusinessSupport from "./pages/BusinessSupport";
 
 function App() {
   return (
@@ -17,6 +19,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="*" element={<h1>Not Found</h1>} />
           <Route path="/login" element={<LoginPage />} />
+
+          <Route path="/customerSup" element={<CustomerSupport />} />
+          <Route path="/businessSup" element={<BusinessSupport />} />
+
           <Route path="/pgboys" element={<PGBoys />} />
           <Route path="/pggirls" element={<PGGirls />} />
           <Route path="/hostelboys" element={<HostelBoys />} />
