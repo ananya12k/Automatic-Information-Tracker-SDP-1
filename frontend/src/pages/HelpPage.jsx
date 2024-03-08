@@ -1,3 +1,4 @@
+import HelpSearch from "../components/modals/HelpSearch";
 import NavBarHelp from "../components/NavbarHelp";
 import HelpCustomer from "../components/HelpCustomer";
 import {
