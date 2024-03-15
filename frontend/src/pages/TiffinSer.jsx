@@ -1,16 +1,50 @@
+import React, { useState, useEffect } from 'react';
+import {
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardText,
+  MDBCardImage,
+  MDBRow,
+  MDBCol,
+} from 'mdb-react-ui-kit';
 import CardTiffin from "../components/CardTiffin";
 import NavBarServices from "../components/NavBarServices";
 
 const TiffinSer = () => {
+  const [tiffins, setTiffins] = useState([]);
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/service/tiffins/') 
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data); 
+        setTiffins(data); 
+      })
+      .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+      });
+  }, []);
+
   return (
     <>
       <NavBarServices />
-      {/* Later on, this data will come from database */}
-      <CardTiffin name="Tiffin's Name" rating="Tiffin's Rating" charges="Tiffin's Charge" phoneNumber="Tiffin's Phone" />
-      <CardTiffin name="Tiffin's Name" rating="Tiffin's Rating" charges="Tiffin's Charge" phoneNumber="Tiffin's Phone" />
-      <CardTiffin name="Tiffin's Name" rating="Tiffin's Rating" charges="Tiffin's Charge" phoneNumber="Tiffin's Phone" />
+      {tiffins && tiffins.length > 0 && tiffins.map((tiffin) => (
+        <CardTiffin
+          key={tiffin.id}
+          name={tiffin.Name}
+          rating={tiffin.Rating}
+          phone={tiffin.Phone}
+          thumbnail={tiffin.Thumbnail}
+        />
+      ))}
     </>
-  )
+  );
 };
 
 export default TiffinSer;
