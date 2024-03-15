@@ -35,7 +35,7 @@ export default function Card(props) {
           <MDBCol md='8'>
             <MDBCardBody>
               <MDBCardTitle className='text-start fs-2'>{props.name}</MDBCardTitle>
-              <MDBCardTitle className='text-start fs-4'>{props.address}</MDBCardTitle>
+              <MDBCardTitle className='text-start fs-4 fw-light'>{props.address}</MDBCardTitle> {/* Adjusted font weight here */}
               <MDBCardText className='text-start fs-4'>
                 <div className="d-flex align-items-center">
                  <span className="me-2" style={{ fontSize: '1.2rem', color: '#6c757d' }}>Stars:</span>
