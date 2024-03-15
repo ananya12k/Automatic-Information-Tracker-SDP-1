@@ -10,6 +10,7 @@ import ContactPage from "./pages/ContactPage";
 import HelpPage from "./pages/HelpPage";
 import CustomerSupport from "./pages/CustomerSupport";
 import BusinessSupport from "./pages/BusinessSupport";
+import PgService from "./pages/PgService";
 
 function App() {
   return (
@@ -23,8 +24,10 @@ function App() {
           <Route path="/customerSup" element={<CustomerSupport />} />
           <Route path="/businessSup" element={<BusinessSupport />} />
 
-          <Route path="/pgboys" element={<PGBoys />} />
-          <Route path="/pggirls" element={<PGGirls />} />
+          {/* <Route path="/pgboys" element={<PGBoys />} />
+          <Route path="/pggirls" element={<PGGirls />} /> */}
+
+          <Route path="/pgs" element={<PgService/>}/>
           <Route path="/hostelboys" element={<HostelBoys />} />
           <Route path="/hostelgirls" element={<HostelGirls />} />
           <Route path="/tiffin" element={<TiffinSer />} />

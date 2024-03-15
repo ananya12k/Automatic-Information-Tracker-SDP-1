@@ -55,6 +55,11 @@ const NavBarServices = () => {
                             </MDBNavbarLink>
                         </MDBNavbarItem>
                         <MDBNavbarItem>
+                            <MDBNavbarLink href="/pgs">
+                                Pg
+                            </MDBNavbarLink>
+                        </MDBNavbarItem>
+                        {/* <MDBNavbarItem>
                             <MDBDropdown>
                                 <MDBDropdownToggle tag="a" className="nav-link">
                                     PG
@@ -68,7 +73,7 @@ const NavBarServices = () => {
                                     </MDBDropdownItem>
                                 </MDBDropdownMenu>
                             </MDBDropdown>
-                        </MDBNavbarItem>
+                        </MDBNavbarItem> */}
                         <MDBNavbarItem>
                             <MDBDropdown>
                                 <MDBDropdownToggle tag="a" className="nav-link">
