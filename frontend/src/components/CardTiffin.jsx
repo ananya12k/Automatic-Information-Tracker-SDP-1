@@ -42,7 +42,7 @@ export default function CardTiffin(props) {
                 </div>
               </MDBCardText>
               <MDBCardText className='text-start fs-4'>
-                <MDBIcon icon='phone' className='me-2' />Phone Number: {props.phone}
+                <MDBIcon icon='phone' className='me-2' />{props.phone}
               </MDBCardText>
               <MDBBtn color='primary' className='mt-3' href={`tel:${props.phone}`}>
                 Call Now
