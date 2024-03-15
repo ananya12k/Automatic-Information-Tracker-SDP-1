@@ -1,19 +1,19 @@
 import React from 'react';
 import {
-  MDBCard,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
-  MDBCardImage,
-  MDBRow,
-  MDBCol,
-  MDBBtn,
-  MDBIcon
+ MDBCard,
+ MDBCardBody,
+ MDBCardTitle,
+ MDBCardText,
+ MDBCardImage,
+ MDBRow,
+ MDBCol,
+ MDBBtn,
+ MDBIcon
 } from 'mdb-react-ui-kit';
 
 export default function Card(props) {
-  // Function to generate star icons based on the rating
-  const renderStars = (rating) => {
+ // Function to generate star icons based on the rating
+ const renderStars = (rating) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
       if (i < rating) {
@@ -23,9 +23,9 @@ export default function Card(props) {
       }
     }
     return stars;
-  };
+ };
 
-  return (
+ return (
     <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
       <MDBCard style={{ width: '50vw', borderRadius: '15px', boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)', overflow: 'hidden' }}>
         <MDBRow className='g-0'>
@@ -38,8 +38,8 @@ export default function Card(props) {
               <MDBCardTitle className='text-start fs-4'>{props.address}</MDBCardTitle>
               <MDBCardText className='text-start fs-4'>
                 <div className="d-flex align-items-center">
-                  <span className="me-2" style={{ fontSize: '1.2rem', color: '#6c757d' }}>Stars:</span>
-                  {renderStars(props.rating)}
+                 <span className="me-2" style={{ fontSize: '1.2rem', color: '#6c757d' }}>Stars:</span>
+                 {renderStars(props.rating)}
                 </div>
               </MDBCardText>
               <MDBCardText className='text-start fs-4'>
@@ -56,5 +56,5 @@ export default function Card(props) {
         </div>
       </MDBCard>
     </div>
-  );
+ );
 }
