@@ -12,11 +12,12 @@ import {
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    username: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    password2: "",
+    first_name: "",
+    last_name: "",
   });
   const [message, setMessage] = useState("");
 
@@ -26,35 +27,35 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (formData.password !== formData.confirmPassword) {
+  
+    if (formData.password !== formData.password2) {
       setMessage("Passwords don't match");
       return;
     }
-
+  
     try {
-      const response = await fetch("/api/register/", {
+      const response = await fetch("http://127.0.0.1:8000/api/register/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
-
+      
       const data = await response.json();
-
+  
       if (response.ok) {
         setMessage("Registration successful");
         // Redirect or perform actions after successful registration
       } else {
-        setMessage(data.error);
+        setMessage(data.password || data.username || "An error occurred. Please try again.");
       }
     } catch (error) {
       console.error("Error:", error);
       setMessage("An error occurred. Please try again later.");
     }
   };
-
+  
   return (
     <MDBContainer fluid style={{ backgroundColor: "wheat" }}>
       <MDBRow>
@@ -70,24 +71,13 @@ const SignUp = () => {
               <h3 className="mb-3">Sign Up</h3>
 
               <form onSubmit={handleSubmit}>
-                <MDBRow className="mb-4">
-                  <MDBCol>
-                    <MDBInput
-                      name="firstName"
-                      label="First name"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                    />
-                  </MDBCol>
-                  <MDBCol>
-                    <MDBInput
-                      name="lastName"
-                      label="Last name"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                    />
-                  </MDBCol>
-                </MDBRow>
+                <MDBInput
+                  name="username"
+                  className="mb-4"
+                  label="Username"
+                  value={formData.username}
+                  onChange={handleChange}
+                />
 
                 <MDBInput
                   name="email"
@@ -106,13 +96,32 @@ const SignUp = () => {
                   onChange={handleChange}
                 />
                 <MDBInput
-                  name="confirmPassword"
+                  name="password2"
                   className="mb-4"
                   type="password"
                   label="Confirm Password"
-                  value={formData.confirmPassword}
+                  value={formData.password2}
                   onChange={handleChange}
                 />
+
+                <MDBRow className="mb-4">
+                  <MDBCol>
+                    <MDBInput
+                      name="first_name"
+                      label="First name"
+                      value={formData.first_name}
+                      onChange={handleChange}
+                    />
+                  </MDBCol>
+                  <MDBCol>
+                    <MDBInput
+                      name="last_name"
+                      label="Last name"
+                      value={formData.last_name}
+                      onChange={handleChange}
+                    />
+                  </MDBCol>
+                </MDBRow>
 
                 <MDBBtn type="submit" className="mb-4" block>
                   Sign up
