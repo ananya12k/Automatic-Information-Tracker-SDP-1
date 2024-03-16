@@ -38,7 +38,12 @@ const LoginComp = ({ open, handleClose }) => {
                   rutrum congue leo eget malesuada. Nulla porttitor accumsan
                   tincidunt. Maecenas sed diam eget risus varius blandit.
                 </p>
-                <MDBBtn color="primary" className="mb-2">
+                <MDBBtn
+                  color="primary"
+                  className="mb-2"
+                  data-mdb-toggle="modal"
+                  data-mdb-target="#LogContinueEm"
+                >
                   Continue with Email
                 </MDBBtn>
                 <MDBBtn color="warning">Continue with Google</MDBBtn>

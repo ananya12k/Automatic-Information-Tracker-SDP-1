@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Card from "../components/Card";
-import NavBarServices from "../components/NavBarServices";
+// import NavBarServices from "../components/NavBarServices";
 
 const HostelBoys = () => {
  const [hostels, setHostels] = useState([]);

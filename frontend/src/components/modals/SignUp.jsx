@@ -70,7 +70,7 @@ const SignUp = ({ open, handleClose }) => {
 
                   <div className="text-center">
                     <p>
-                      Not a member? <a href="#!">Register</a>
+                      a member? <a href="#!">Register</a>
                     </p>
                     <p>or sign up with:</p>
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   MDBCard,
   MDBCardBody,
@@ -7,42 +7,47 @@ import {
   MDBCardImage,
   MDBRow,
   MDBCol,
-} from 'mdb-react-ui-kit';
+} from "mdb-react-ui-kit";
 import CardTiffin from "../components/CardTiffin";
-import NavBarServices from "../components/NavBarServices";
+// import NavBarServices from "../components/NavBarServices";
 
 const TiffinSer = () => {
   const [tiffins, setTiffins] = useState([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/service/tiffins/') 
-      .then(response => {
+    fetch("http://127.0.0.1:8000/service/tiffins/")
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         return response.json();
       })
-      .then(data => {
-        console.log(data); 
-        setTiffins(data); 
+      .then((data) => {
+        console.log(data);
+        setTiffins(data);
       })
-      .catch(error => {
-        console.error('There has been a problem with your fetch operation:', error);
+      .catch((error) => {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
       });
   }, []);
 
   return (
     <>
       <NavBarServices />
-      {tiffins && tiffins.length > 0 && tiffins.map((tiffin) => (
-        <CardTiffin
-          key={tiffin.id}
-          name={tiffin.Name}
-          rating={tiffin.Rating}
-          phone={tiffin.Phone}
-          thumbnail={tiffin.Thumbnail}
-        />
-      ))}
+      {tiffins &&
+        tiffins.length > 0 &&
+        tiffins.map((tiffin) => (
+          <CardTiffin
+            key={tiffin.id}
+            name={tiffin.Name}
+            rating={tiffin.Rating}
+            phone={tiffin.Phone}
+            thumbnail={tiffin.Thumbnail}
+          />
+        ))}
     </>
   );
 };

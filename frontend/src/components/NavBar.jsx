@@ -111,8 +111,8 @@ const NavBar = () => {
                 <MDBNavbarLink>Search</MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBBtn rounded onClick={handleOpen}>
-                  <MDBNavbarLink>Login</MDBNavbarLink>
+                <MDBBtn rounded>
+                  <MDBNavbarLink href="/welcome">Login</MDBNavbarLink>
                 </MDBBtn>
               </MDBNavbarItem>
             </MDBNavbarNav>

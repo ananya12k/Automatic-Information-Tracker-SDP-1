@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
 import PGBoys from "./pages/PGBoys";
 import PGGirls from "./pages/PGGirls";
 import HostelBoys from "./pages/HostelBoys";
@@ -10,6 +9,10 @@ import ContactPage from "./pages/ContactPage";
 import HelpPage from "./pages/HelpPage";
 import CustomerSupport from "./pages/CustomerSupport";
 import BusinessSupport from "./pages/BusinessSupport";
+import WelcomeSignUp from "./pages/login/WelcomeSignUp";
+import EmailLogin from "./pages/login/EmailLogin";
+import ForgotPassword from "./pages/login/ForgotPassword";
+import SignUp from "./pages/login/SignUp";
 import PgService from "./pages/PgService";
 
 function App() {
@@ -19,8 +22,6 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="*" element={<h1>Not Found</h1>} />
-          <Route path="/login" element={<LoginPage />} />
-
           <Route path="/customerSup" element={<CustomerSupport />} />
           <Route path="/businessSup" element={<BusinessSupport />} />
 
@@ -33,6 +34,10 @@ function App() {
           <Route path="/tiffin" element={<TiffinSer />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/help" element={<HelpPage />} />
+          <Route path="/welcome" element={<WelcomeSignUp />} />
+          <Route path="/login" element={<EmailLogin />} />
+          <Route path="/forgot" element={<ForgotPassword />} />
+          <Route path="/register" element={<SignUp />} />
         </Routes>
       </Router>
     </>
