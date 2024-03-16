@@ -9,7 +9,7 @@ import {
   MDBCol,
 } from "mdb-react-ui-kit";
 import CardTiffin from "../components/CardTiffin";
-// import NavBarServices from "../components/NavBarServices";
+import NavBarServices from "../components/NavBarServices";
 
 const TiffinSer = () => {
   const [tiffins, setTiffins] = useState([]);
