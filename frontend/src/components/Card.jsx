@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
  MDBCard,
  MDBCardBody,
@@ -12,6 +12,8 @@ import {
 } from 'mdb-react-ui-kit';
 
 export default function Card(props) {
+ const [hover, setHover] = useState(false);
+
  // Function to generate star icons based on the rating
  const renderStars = (rating) => {
     const stars = [];
@@ -25,24 +27,47 @@ export default function Card(props) {
     return stars;
  };
 
+ const cardStyle = {
+    width: '45vw',
+    height: '250px',
+    borderRadius: '15px',
+    boxShadow: hover ? '0 10px 20px rgba(0, 0, 0, 0.2)' : '0 4px 8px 0 rgba(0,0,0,0.2)',
+    overflow: 'hidden',
+    transform: hover ? 'scale(1.05)' : 'scale(1)',
+    transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out'
+ };
+
+ const imageStyle = {
+    width: '100%',
+    height: 'auto',
+    objectFit: 'cover',
+    transition: 'transform 0.3s ease-in-out',
+    transform: hover ? 'scale(1.05)' : 'scale(1)'
+ };
+
+ const textStyle = {
+    color: hover ? '#000' : '#6c757d',
+    transition: 'color 0.3s ease-in-out'
+ };
+
  return (
-    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-      <MDBCard style={{ width: '50vw', borderRadius: '15px', boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)', overflow: 'hidden' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
+      <MDBCard
+        style={cardStyle}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >
         <MDBRow className='g-0'>
-          <MDBCol md='4'>
-            <MDBCardImage src={props.thumbnail} alt='Tiffin Thumbnail' className='card-image' fluid />
+          <MDBCol md='6'>
+            <MDBCardImage src={props.thumbnail} alt='Tiffin Thumbnail' className='card-image' fluid style={imageStyle} />
           </MDBCol>
-          <MDBCol md='8'>
+          <MDBCol md='6'>
             <MDBCardBody>
-              <MDBCardTitle className='text-start fs-2'>{props.name}</MDBCardTitle>
-              <MDBCardTitle className='text-start fs-4 fw-light'>{props.address}</MDBCardTitle> {/* Adjusted font weight here */}
-              <MDBCardText className='text-start fs-4'>
-                <div className="d-flex align-items-center">
-                 {/* <span className="me-2" style={{ fontSize: '1.2rem', color: '#6c757d' }}></span> */}
-                 {renderStars(props.rating)}
-                </div>
+              <MDBCardTitle className='text-start fs-2' style={textStyle}>{props.name}</MDBCardTitle>
+              <MDBCardText className='text-start fs-4' style={textStyle}>
+                {renderStars(props.rating)}
               </MDBCardText>
-              <MDBCardText className='text-start fs-4'>
+              <MDBCardText className='text-start fs-4' style={textStyle}>
                 <MDBIcon icon='phone' className='me-2' />{props.phone}
               </MDBCardText>
               <MDBBtn color='primary' className='mt-3' href={`tel:${props.phone}`}>
@@ -51,9 +76,6 @@ export default function Card(props) {
             </MDBCardBody>
           </MDBCol>
         </MDBRow>
-        <div className="card-footer text-end">
-          <small className="text-muted">Last updated 3 mins ago</small>
-        </div>
       </MDBCard>
     </div>
  );
