@@ -3,10 +3,10 @@ import Card from "../components/Card";
 import NavBarServices from "../components/NavBarServices";
 
 const HostelGirls = () => {
- const [hostels, setHostels] = useState([]);
+  const [hostels, setHostels] = useState([]);
 
- useEffect(() => {
-    fetch('http://127.0.0.1:8000/service/girls-hostels/') 
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/service/girls-hostels/')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -15,7 +15,7 @@ const HostelGirls = () => {
       })
       .then(text => {
         const cleanedText = text.replace(/NaN/g, 'null');
-        return JSON.parse(cleanedText); 
+        return JSON.parse(cleanedText);
       })
       .then(data => {
         setHostels(data);
@@ -23,23 +23,24 @@ const HostelGirls = () => {
       .catch(error => {
         console.error('There has been a problem with your fetch operation:', error);
       });
- }, []);
+  }, []);
 
- return (
+  return (
     <>
       <NavBarServices />
       {hostels.map((hostel, index) => (
         <Card
-          key={index} 
+          key={index}
           name={hostel.Name}
           address={hostel.Address}
           rating={hostel.Rating}
           phone={hostel.Phone}
           thumbnail={hostel.Thumbnail}
+          images={hostel.Images}
         />
       ))}
     </>
- );
+  );
 };
 
 export default HostelGirls;
