@@ -18,7 +18,11 @@ import {
   MDBModalFooter,
   MDBCarousel,
   MDBCarouselItem,
-  MDBTypography
+  MDBTypography,
+  MDBCarouselCaption,
+  MDBListGroup,
+  MDBListGroupItem,
+  MDBCardFooter,
 } from 'mdb-react-ui-kit';
 
 import Backdrop from './Backdrop';
@@ -48,6 +52,13 @@ export default function Card(props) {
     }
     return stars;
   };
+
+  const openOnGoogleMap = () => {
+    const latitude = props.latitude;
+    const longitude = props.longitude;
+    const googleMapsUrl = `http://maps.google.com/maps?q=${latitude},${longitude}`;
+    window.location.href = googleMapsUrl;
+  }
 
   const cardStyle = {
     width: '45vw',
@@ -100,8 +111,8 @@ export default function Card(props) {
 
       <Backdrop show={showModal} />
 
-      <MDBModal open={showModal} setOpen={setShowModal} tabIndex='-1'>
-        <MDBModalDialog centered size="lg">
+      <MDBModal staticBackdrop open={showModal} setOpen={setShowModal} tabIndex='-1'>
+        <MDBModalDialog centered size="xl">
           <MDBModalContent>
             <MDBModalHeader>
               <MDBModalTitle>
@@ -111,24 +122,49 @@ export default function Card(props) {
               </MDBModalTitle>
               <MDBBtn className='btn-close' color='none' onClick={toggleOpen}></MDBBtn>
             </MDBModalHeader>
-            {/* later, change the height according to content */}
-            <MDBModalBody style={{ height: "300px" }}>
-              <MDBCarousel>
-                {Array.isArray(props.images) && props.images.map((image, index) => (
-                  <MDBCarouselItem key={index} itemId={index + 1}>
-                    <img src={image} className='d-block w-100' alt={`Slide ${index + 1}`} />
+            <div className='d-flex flex-row flex-wrap'>
+              {/* Carousel for images with top and left margin */}
+              <div style={{ width: '50%', overflow: 'hidden', marginLeft: '20px', marginTop: '20px' }}>
+                <MDBCarousel showControls>
+                  <MDBCarouselItem itemId={1}>
+                    <img src='https://lh3.googleusercontent.com/p/AF1QipMKZMIyCfElTi1SPJzqE8tzx-Sr7SFFOoMreluI=s1360-w1360-h1020' className='d-block w-100' alt='...' style={{ maxHeight: '400px', width: 'auto', objectFit: 'contain' }} />
                   </MDBCarouselItem>
-                ))}
-              </MDBCarousel>
-            </MDBModalBody>
+                  <MDBCarouselItem itemId={2}>
+                    <img src='https://lh3.googleusercontent.com/p/AF1QipNCQO78fr0Uk3rYdzsx_eX1UK0gtTL6iJCLZ1VM=s1360-w1360-h1020' className='d-block w-100' alt='...' style={{ maxHeight: '400px', width: 'auto', objectFit: 'contain' }} />
+                  </MDBCarouselItem>
+                  <MDBCarouselItem itemId={3}>
+                    <img src='https://lh3.googleusercontent.com/p/AF1QipM-bVdWV2YunlRZgh1tKkvOZ5465zZwyIzB2cDZ=s1360-w1360-h1020' className='d-block w-100' alt='...' style={{ maxHeight: '400px', width: 'auto', objectFit: 'contain' }} />
+                  </MDBCarouselItem>
+                </MDBCarousel>
+              </div>
+              {/* Additional card next to the carousel */}
+              <div style={{ width: '4ch0%', marginLeft: '20px', marginTop: '20px' }} className='flex-grow-1'>
+                <MDBRow className='row-cols-1 row-cols-md-3 g-4 '>
+                  <MDBCol>
+                    <MDBCard className='h-100 '>
+                      <MDBCardBody>
+                        <MDBCardTitle>Card title</MDBCardTitle>
+                        <MDBCardText>
+                          This is a wider card
+                        </MDBCardText>
+                      </MDBCardBody>
+                    </MDBCard>
+                  </MDBCol>
+                </MDBRow>
+              </div>
+            </div>
             <MDBModalFooter>
               <MDBBtn color='secondary' onClick={toggleOpen} className='display-6'>
                 Write a Review
+              </MDBBtn>
+              <MDBBtn color='secondary' onClick={() => openOnGoogleMap()} className='display-6'>
+                Get Directions
               </MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>
       </MDBModal>
+
     </div>
   );
 }
