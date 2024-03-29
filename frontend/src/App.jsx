@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import PGBoys from "./pages/PGBoys";
-import PGGirls from "./pages/PGGirls";
+// import PGBoys from "./pages/PGBoys";
+// import PGGirls from "./pages/PGGirls";
 import HostelBoys from "./pages/HostelBoys";
 import HostelGirls from "./pages/HostelGirls";
 import TiffinSer from "./pages/TiffinSer";
@@ -14,6 +14,8 @@ import EmailLogin from "./pages/login/EmailLogin";
 import ForgotPassword from "./pages/login/ForgotPassword";
 import SignUp from "./pages/login/SignUp";
 import PgService from "./pages/PgService";
+import VendorDash from "./pages/VendorDash";
+import VendorRegister from "./pages/VendorRegister";
 
 function App() {
   return (
@@ -28,7 +30,7 @@ function App() {
           {/* <Route path="/pgboys" element={<PGBoys />} />
           <Route path="/pggirls" element={<PGGirls />} /> */}
 
-          <Route path="/pgs" element={<PgService/>}/>
+          <Route path="/pgs" element={<PgService />} />
           <Route path="/hostelboys" element={<HostelBoys />} />
           <Route path="/hostelgirls" element={<HostelGirls />} />
           <Route path="/tiffin" element={<TiffinSer />} />
@@ -38,6 +40,8 @@ function App() {
           <Route path="/login" element={<EmailLogin />} />
           <Route path="/forgot" element={<ForgotPassword />} />
           <Route path="/register" element={<SignUp />} />
+          <Route path="/vendordash" element={<VendorDash />} />
+          <Route path="/vendorreg" element={<VendorRegister />} />
         </Routes>
       </Router>
     </>
