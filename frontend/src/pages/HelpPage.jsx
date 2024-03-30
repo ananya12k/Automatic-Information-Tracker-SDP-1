@@ -1,13 +1,5 @@
-import HelpSearch from "../components/modals/HelpSearch";
 import NavBarHelp from "../components/NavbarHelp";
 import HelpCustomer from "../components/HelpCustomer";
-import {
-  MDBCard,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
-  MDBBtn,
-} from "mdb-react-ui-kit";
 
 const HelpPage = () => {
   return (
