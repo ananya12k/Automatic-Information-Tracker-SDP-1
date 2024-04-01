@@ -16,7 +16,7 @@ import NavBarServices from "../components/NavBarServices";
 
 const ContactPage = () => {
   const email = "abc@gmail.com";
-  const phone = "123456789";
+  const phone = "1234567890";
   const form = useRef();
   const [emailSent, setEmailSent] = useState(false);
 
