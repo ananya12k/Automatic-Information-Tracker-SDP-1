@@ -16,6 +16,9 @@ import SignUp from "./pages/login/SignUp";
 import PgService from "./pages/PgService";
 import VendorDash from "./pages/VendorDash";
 import VendorRegister from "./pages/VendorRegister";
+import ReviewModal from "./components/ReviewModal";
+import Rating from "./components/Rating";
+import UserProfile from "./components/UserProfile";
 
 function App() {
   return (
@@ -42,6 +45,9 @@ function App() {
           <Route path="/register" element={<SignUp />} />
           <Route path="/vendordash" element={<VendorDash />} />
           <Route path="/vendorreg" element={<VendorRegister />} />
+          <Route path="/review" element={<ReviewModal />} />
+          <Route path="/rating" element={<Rating />} />
+          <Route path="/userprofile" element={<UserProfile />} />
         </Routes>
       </Router>
     </>

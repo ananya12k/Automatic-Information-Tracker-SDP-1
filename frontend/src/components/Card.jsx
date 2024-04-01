@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   MDBCard,
   MDBCardBody,
@@ -10,36 +10,27 @@ import {
   MDBBtn,
   MDBIcon,
   MDBModal,
-  MDBModalBody,
   MDBModalDialog,
   MDBModalContent,
   MDBModalHeader,
   MDBModalTitle,
   MDBModalFooter,
-  MDBCarousel,
-  MDBCarouselItem,
   MDBTypography,
-  MDBCarouselCaption,
   MDBListGroup,
   MDBListGroupItem,
   MDBCardFooter,
 } from 'mdb-react-ui-kit';
 
 import Backdrop from './Backdrop';
+import ReviewModal from './ReviewModal';
 
 export default function Card(props) {
   const [hover, setHover] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showReviewModal, setShowReviewModal] = useState(false);
 
   const toggleOpen = () => setShowModal(!showModal);
-
-  useEffect(() => {
-    if (showModal) {
-      document.body.style.overflow = 'hidden'; // Prevent scrolling
-    } else {
-      document.body.style.overflow = '';
-    }
-  }, [showModal]);
+  const toggleReviewModal = () => setShowReviewModal(!showReviewModal);
 
   const renderStars = (rating) => {
     const stars = [];
@@ -111,9 +102,9 @@ export default function Card(props) {
 
       <Backdrop show={showModal} />
 
-      <MDBModal staticBackdrop open={showModal} setOpen={setShowModal} tabIndex='-1'>
+      <MDBModal staticBackdrop open={showModal} setOpen={setShowModal} tabIndex='-1' position="fixed">
         <MDBModalDialog centered size="xl">
-          <MDBModalContent>
+          <MDBModalContent scrollable>
             <MDBModalHeader>
               <MDBModalTitle>
                 <MDBTypography tag="strong" className='display-6'>
@@ -123,22 +114,10 @@ export default function Card(props) {
               <MDBBtn className='btn-close' color='none' onClick={toggleOpen}></MDBBtn>
             </MDBModalHeader>
             <div className='d-flex flex-row flex-wrap'>
-              {/* Carousel for images with top and left margin */}
               <div style={{ width: '50%', overflow: 'hidden', marginLeft: '20px', marginTop: '20px' }}>
-                <MDBCarousel showControls>
-                  <MDBCarouselItem itemId={1}>
-                    <img src='https://lh3.googleusercontent.com/p/AF1QipMKZMIyCfElTi1SPJzqE8tzx-Sr7SFFOoMreluI=s1360-w1360-h1020' className='d-block w-100' alt='...' style={{ maxHeight: '400px', width: 'auto', objectFit: 'contain' }} />
-                  </MDBCarouselItem>
-                  <MDBCarouselItem itemId={2}>
-                    <img src='https://lh3.googleusercontent.com/p/AF1QipNCQO78fr0Uk3rYdzsx_eX1UK0gtTL6iJCLZ1VM=s1360-w1360-h1020' className='d-block w-100' alt='...' style={{ maxHeight: '400px', width: 'auto', objectFit: 'contain' }} />
-                  </MDBCarouselItem>
-                  <MDBCarouselItem itemId={3}>
-                    <img src='https://lh3.googleusercontent.com/p/AF1QipM-bVdWV2YunlRZgh1tKkvOZ5465zZwyIzB2cDZ=s1360-w1360-h1020' className='d-block w-100' alt='...' style={{ maxHeight: '400px', width: 'auto', objectFit: 'contain' }} />
-                  </MDBCarouselItem>
-                </MDBCarousel>
+                {/* Carousel for images */}
               </div>
-              {/* Additional card next to the carousel */}
-              <div style={{ width: '4ch0%', marginLeft: '20px', marginTop: '20px' }} className='flex-grow-1'>
+              <div style={{ width: '50%', marginLeft: '20px', marginTop: '20px' }} className='flex-grow-1'>
                 <MDBRow className='row-cols-1 row-cols-md-3 g-4 '>
                   <MDBCol>
                     <MDBCard className='h-100 '>
@@ -154,17 +133,17 @@ export default function Card(props) {
               </div>
             </div>
             <MDBModalFooter>
-              <MDBBtn color='secondary' onClick={toggleOpen} className='display-6'>
+              <MDBBtn color='secondary' onClick={toggleReviewModal} className='display-6'>
                 Write a Review
               </MDBBtn>
-              <MDBBtn color='secondary' onClick={() => openOnGoogleMap()} className='display-6'>
+              <MDBBtn color='secondary' onClick={openOnGoogleMap} className='display-6'>
                 Get Directions
               </MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>
       </MDBModal>
-
+      <ReviewModal open={showReviewModal} onClose={toggleReviewModal} />
     </div>
   );
 }
