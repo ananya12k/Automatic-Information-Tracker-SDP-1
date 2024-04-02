@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Card from "../components/Card";
-import NavBarServices from "../components/NavBarServices";
+import NavBar from "../components/NavBar";
 import { MDBSpinner } from 'mdb-react-ui-kit';
 
 const HostelGirls = () => {
@@ -31,7 +31,8 @@ const HostelGirls = () => {
 
  return (
     <>
-      <NavBarServices />
+      {/* <NavBarServices /> */}
+      <NavBar/>
       {isLoading ? (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
           <MDBSpinner role='status'>

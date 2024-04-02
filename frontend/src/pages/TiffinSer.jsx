@@ -9,7 +9,7 @@ import {
   MDBCol,
 } from "mdb-react-ui-kit";
 import CardTiffin from "../components/CardTiffin";
-import NavBarServices from "../components/NavBarServices";
+import NavBar from "../components/NavBar";
 
 const TiffinSer = () => {
   const [tiffins, setTiffins] = useState([]);
@@ -36,7 +36,7 @@ const TiffinSer = () => {
 
   return (
     <>
-      <NavBarServices />
+      <NavBar/>
       {tiffins &&
         tiffins.length > 0 &&
         tiffins.map((tiffin) => (

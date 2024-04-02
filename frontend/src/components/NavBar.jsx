@@ -84,14 +84,14 @@ const NavBar = () => {
                   Contact Us
                 </MDBNavbarLink>
               </MDBNavbarItem>
-              <MDBNavbarItem>
+              {/* <MDBNavbarItem>
                 <MDBNavbarLink aria-current="page" href="/help">
                   Help
                 </MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
                 <MDBNavbarLink>Search</MDBNavbarLink>
-              </MDBNavbarItem>
+              </MDBNavbarItem> */}
               <MDBNavbarItem>
                 <MDBBtn rounded className="mx-2">
                   <MDBNavbarLink href="/welcome">Login</MDBNavbarLink>

@@ -9,7 +9,7 @@ import {
   MDBCol,
 } from 'mdb-react-ui-kit';
 import Card from '../components/Card';
-import NavBarServices from "../components/NavBarServices";
+import NavBar from "../components/NavBar";
 
 const PgService = () => {
   const [pg,setPg] = useState([]);
@@ -36,7 +36,7 @@ const PgService = () => {
 
   return (
     <>
-      <NavBarServices />
+      <NavBar />
       {pg && pg.length > 0 && pg.map((x,idx) => (
         <Card
           key={x.idx}

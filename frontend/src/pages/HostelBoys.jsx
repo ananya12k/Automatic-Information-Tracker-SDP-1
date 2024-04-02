@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from "../components/Card";
 // import NavBarServices from "../components/NavBarServices";
-
+import NavBar from "../components/NavBar";
 const HostelBoys = () => {
  const [hostels, setHostels] = useState([]);
 
@@ -27,7 +27,7 @@ const HostelBoys = () => {
 
  return (
     <>
-      <NavBarServices />
+      <NavBar />
       {hostels.map((hostel, index) => (
         <Card
           key={index} 
