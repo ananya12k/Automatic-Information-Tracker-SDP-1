@@ -12,7 +12,7 @@ import {
   MDBModalBody,
 } from "mdb-react-ui-kit";
 import emailjs from '@emailjs/browser';
-import NavBarServices from "../components/NavBarServices";
+import NavBar from "../components/NavBar";
 
 const ContactPage = () => {
   const email = "abc@gmail.com";
@@ -39,7 +39,7 @@ const ContactPage = () => {
 
   return (
     <>
-      <NavBarServices />
+      <NavBar/>
       <div className="container py-5">
         <MDBCardGroup className="mb-5">
           <MDBCard className="text-center">
