@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   MDBNavbar,
   MDBContainer,
@@ -14,8 +15,6 @@ import {
   MDBNavbarBrand,
   MDBBtn,
 } from "mdb-react-ui-kit";
-
-import { useState } from "react";
 import LoginComp from "./modals/LoginComp";
 
 const NavBar = () => {
@@ -51,32 +50,15 @@ const NavBar = () => {
           </MDBNavbarToggler>
 
           <MDBCollapse navbar>
-            <MDBNavbarNav right fullWidth={false} className="mb-2 mb-lg-0">
+            <MDBNavbarNav left fullWidth={false} className="mb-2 mb-lg-0">
               <MDBNavbarItem>
                 <MDBNavbarLink active aria-current="page" href="/">
                   Home
                 </MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBNavbarLink href="/pgs">
-                  Pg
-                </MDBNavbarLink>
+                <MDBNavbarLink href="/pgs">Pg</MDBNavbarLink>
               </MDBNavbarItem>
-              {/* <MDBNavbarItem>
-                <MDBDropdown>
-                  <MDBDropdownToggle tag="a" className="nav-link">
-                    PG
-                  </MDBDropdownToggle>
-                  <MDBDropdownMenu>
-                    <MDBDropdownItem link href="/pggirls">
-                      Girls PG
-                    </MDBDropdownItem>
-                    <MDBDropdownItem link href="/pgboys">
-                      Boys PG
-                    </MDBDropdownItem>
-                  </MDBDropdownMenu>
-                </MDBDropdown>
-              </MDBNavbarItem> */}
               <MDBNavbarItem>
                 <MDBDropdown>
                   <MDBDropdownToggle tag="a" className="nav-link">
@@ -111,8 +93,18 @@ const NavBar = () => {
                 <MDBNavbarLink>Search</MDBNavbarLink>
               </MDBNavbarItem>
               <MDBNavbarItem>
-                <MDBBtn rounded>
+                <MDBBtn rounded className="mx-2">
                   <MDBNavbarLink href="/welcome">Login</MDBNavbarLink>
+                </MDBBtn>
+              </MDBNavbarItem>
+            </MDBNavbarNav>
+            <MDBNavbarNav right fullWidth={false} className="mb-2 mb-lg-0">
+              <MDBNavbarItem>
+                <MDBBtn outline rounded className="mx-2">
+                  <MDBNavbarLink href="/vendordash">
+                    <MDBIcon className="me-2" fas icon="home" color="primary" />
+                    Add Property
+                  </MDBNavbarLink>
                 </MDBBtn>
               </MDBNavbarItem>
             </MDBNavbarNav>
