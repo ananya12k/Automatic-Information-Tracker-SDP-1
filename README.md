@@ -16,9 +16,9 @@ Develop a user-centric platform for students to find PG accommodations, hostels,
 ## Technologies Used
 <ul>
   <li>Frontend : React</li>
-  <li>Backend : Django,Node JS</li>
-  <li>Database : MongoDB</li>
-  <li>User Manual: Docusaurus</li>
+  <li>Backend : Django</li>
+  <li>Database : SQLite</li>
+<!--   <li>User Manual: Docusaurus</li> -->
   <li>Deployment : Vercel</li>
 </ul>
 
