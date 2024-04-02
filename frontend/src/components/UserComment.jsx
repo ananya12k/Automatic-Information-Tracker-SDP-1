@@ -4,9 +4,9 @@ const UserComment = () => {
 
  const cardStyle = {
     width: '100%',
-    maxWidth: '75vw',
+    maxWidth: '65vw',
     height: 'auto', 
-    background: '#353535',
+    background: '#f5f5f5', // Light background
     borderRadius: '20px',
     display: 'flex',
     alignItems: 'center',
@@ -14,7 +14,7 @@ const UserComment = () => {
     backdropFilter: 'blur(10px)',
     transition: '0.5s ease-in-out',
     padding: '10px', 
-    margin:'20px'
+    margin:'5px'
  };
 
  const imgStyle = {
@@ -22,12 +22,12 @@ const UserComment = () => {
     height: '60px',
     marginRight: '15px',
     borderRadius: '10px',
-    background: 'linear-gradient(#d7cfcf, #9198e5)',
+    background: 'linear-gradient(#e0e0e0, #d7cfcf)', // Light gradient
  };
 
  const textBoxStyle = {
     width: 'calc(100% - 80px)', 
-    color: 'white',
+    color: '#333', // Darker text for contrast
     fontFamily: "'Poppins', sans-serif",
     display: 'flex',
     flexDirection: 'column',
@@ -43,7 +43,7 @@ const UserComment = () => {
 
  const spanStyle = {
     fontSize: '12px', 
-    color: '#ccc', 
+    color: '#666', // Slightly darker for contrast
  };
 
  const h1Style = {
@@ -55,7 +55,7 @@ const UserComment = () => {
  const pStyle = {
     fontSize: '14px', 
     fontWeight: 'lighter',
-    color: '#ccc', 
+    color: '#666', // Slightly darker for contrast
  };
 
  return (
