@@ -6,7 +6,7 @@ const UserComment = () => {
     width: '100%',
     maxWidth: '65vw',
     height: 'auto', 
-    background: '#f5f5f5', // Light background
+    background: '#f5f5f5', 
     borderRadius: '20px',
     display: 'flex',
     alignItems: 'center',
@@ -14,7 +14,7 @@ const UserComment = () => {
     backdropFilter: 'blur(10px)',
     transition: '0.5s ease-in-out',
     padding: '10px', 
-    margin:'5px'
+    marginLeft:'30px'
  };
 
  const imgStyle = {
@@ -27,7 +27,7 @@ const UserComment = () => {
 
  const textBoxStyle = {
     width: 'calc(100% - 80px)', 
-    color: '#333', // Darker text for contrast
+    color: '#333', 
     fontFamily: "'Poppins', sans-serif",
     display: 'flex',
     flexDirection: 'column',
@@ -43,7 +43,7 @@ const UserComment = () => {
 
  const spanStyle = {
     fontSize: '12px', 
-    color: '#666', // Slightly darker for contrast
+    color: '#666', 
  };
 
  const h1Style = {
@@ -55,7 +55,7 @@ const UserComment = () => {
  const pStyle = {
     fontSize: '14px', 
     fontWeight: 'lighter',
-    color: '#666', // Slightly darker for contrast
+    color: '#666',
  };
 
  return (
