@@ -10,11 +10,12 @@ import {
  MDBBtn,
  MDBIcon
 } from 'mdb-react-ui-kit';
+import { useNavigate } from 'react-router-dom'; 
 
 export default function CardTiffin(props) {
  const [isHovered, setIsHovered] = useState(false);
+ const navigate = useNavigate(); 
 
- // Function to generate star icons based on the rating
  const renderStars = (rating) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -39,12 +40,17 @@ export default function CardTiffin(props) {
     transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out'
  };
 
+ const handleCardClick = () => {
+    navigate('/details', { state: { hostel: props } });
+ };
+
  return (
     <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
       <MDBCard
         style={cardStyle}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onClick={handleCardClick} 
       >
         <MDBRow className='g-0'>
           <MDBCol md='4'>
