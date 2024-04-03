@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import NavBarServices from "../components/NavBarServices";
+import NavBar from "../components/NavBar";
 import { MDBCardText, MDBCarousel, MDBCarouselItem } from 'mdb-react-ui-kit';
 import CardDesign from '../components/CardDesign';
 import UserComment from '../components/UserComment';
@@ -43,7 +43,7 @@ export default function OnClick(props) {
 
  return (
     <>
-      <NavBarServices />
+      <NavBar />
       <MDBCardText className="text-center fs-2 display-5" style={{ padding: "30px", fontFamily: "Arial, sans-serif", color: "#333" }}>
         {hostel ? hostel.name : 'not received'}
       </MDBCardText>
