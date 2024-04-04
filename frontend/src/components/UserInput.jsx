@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserInput = ({ styles }) => {
+const UserInput = ({ styles, onChange }) => {
  return (
     <textarea
       style={{
@@ -11,6 +11,7 @@ const UserInput = ({ styles }) => {
         ...styles,
       }}
       placeholder='Share details of your own experience at this place'
+      onChange={onChange} 
     />
  );
 };
