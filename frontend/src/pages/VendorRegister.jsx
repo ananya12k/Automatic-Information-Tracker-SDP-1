@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBRadio, MDBBtn } from "mdb-react-ui-kit";
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBInput,
+  MDBRadio,
+  MDBBtn,
+} from "mdb-react-ui-kit";
 import HostelVen from "../components/HostelVen";
 import HostelPGVen from "../components/HostelPGVen";
 import TiffinVen from "../components/TiffinVen";
 
 const VendorRegister = () => {
- const [selectedType, setSelectedType] = useState("");
- const [hostelData, setHostelData] = useState(null);
- const [hostelPGData, setHostelPGData] = useState(null);
- const [tiffinData, setTiffinData] = useState(null);
- const navigate = useNavigate();
+  const [selectedType, setSelectedType] = useState("");
+  const [hostelData, setHostelData] = useState(null);
+  const [hostelPGData, setHostelPGData] = useState(null);
+  const [tiffinData, setTiffinData] = useState(null);
+  const navigate = useNavigate();
 
- const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Construct formData based on selectedType
     let formData = {
@@ -49,9 +56,9 @@ const VendorRegister = () => {
     } catch (error) {
       console.error("Error:", error.message);
     }
- };
+  };
 
- return (
+  return (
     <MDBContainer style={{ marginTop: 40 }}>
       <form onSubmit={handleSubmit}>
         <MDBRow>
@@ -62,7 +69,7 @@ const VendorRegister = () => {
             <MDBInput id="form10Example2" label="Email address" type="email" />
           </MDBCol>
         </MDBRow>
-
+        <hr />
         <MDBRow>
           <MDBCol>
             <MDBInput id="form10Example3" label="Phone Number" type="tel" />
@@ -71,7 +78,7 @@ const VendorRegister = () => {
             <MDBInput id="form10Example4" label="Address" />
           </MDBCol>
         </MDBRow>
-
+        <hr />
         <MDBRow>
           <MDBCol>
             <MDBRadio
@@ -95,7 +102,9 @@ const VendorRegister = () => {
               checked={selectedType === "Pg"}
               onChange={(e) => setSelectedType(e.target.value)}
             />
-            {selectedType === "Pg" && <HostelPGVen onHostelPGData={setHostelPGData} />}
+            {selectedType === "Pg" && (
+              <HostelPGVen onHostelPGData={setHostelPGData} />
+            )}
           </MDBCol>
           <MDBCol>
             <MDBRadio
@@ -110,11 +119,13 @@ const VendorRegister = () => {
             {selectedType === "T" && <TiffinVen onTiffinData={setTiffinData} />}
           </MDBCol>
         </MDBRow>
-
-        <MDBBtn rounded type="submit">Submit</MDBBtn>
+        <hr />
+        <MDBBtn rounded type="submit">
+          Submit
+        </MDBBtn>
       </form>
     </MDBContainer>
- );
+  );
 };
 
 export default VendorRegister;
