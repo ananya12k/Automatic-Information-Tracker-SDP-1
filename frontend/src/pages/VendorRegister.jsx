@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBRadio, MDBBtn } from "mdb-react-ui-kit";
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBInput,
+  MDBRadio,
+  MDBBtn,
+} from "mdb-react-ui-kit";
 import HostelVen from "../components/HostelVen";
 import HostelPGVen from "../components/HostelPGVen";
 import TiffinVen from "../components/TiffinVen";
@@ -16,7 +23,7 @@ const VendorRegister = () => {
  const [address, setAddress] = useState("");
  const navigate = useNavigate();
 
- const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let formData = {
       name,
@@ -51,9 +58,9 @@ const VendorRegister = () => {
     } catch (error) {
       console.error("Error:", error.message);
     }
- };
+  };
 
- return (
+  return (
     <MDBContainer style={{ marginTop: 40 }}>
       <form onSubmit={handleSubmit}>
         <MDBRow>
@@ -64,7 +71,7 @@ const VendorRegister = () => {
             <MDBInput label="Email address" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           </MDBCol>
         </MDBRow>
-
+        
         <MDBRow>
           <MDBCol>
             <MDBInput label="Phone Number" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
@@ -73,7 +80,7 @@ const VendorRegister = () => {
             <MDBInput label="Address" value={address} onChange={(e) => setAddress(e.target.value)} />
           </MDBCol>
         </MDBRow>
-
+       
         <MDBRow>
           <MDBCol>
             <MDBRadio
@@ -97,7 +104,7 @@ const VendorRegister = () => {
               checked={selectedType === "Pg"}
               onChange={(e) => setSelectedType(e.target.value)}
             />
-            {selectedType === "Pg" && <HostelPGVen onHostelPGData={setHostelPGData} />}
+            {selectedType === "Pg" && (<HostelPGVen onHostelPGData={setHostelPGData} />)}
           </MDBCol>
           <MDBCol>
             <MDBRadio
@@ -112,11 +119,11 @@ const VendorRegister = () => {
             {selectedType === "T" && <TiffinVen onTiffinData={setTiffinData} />}
           </MDBCol>
         </MDBRow>
-
+    
         <MDBBtn rounded type="submit">Submit</MDBBtn>
       </form>
     </MDBContainer>
- );
+  );
 };
 
 export default VendorRegister;
