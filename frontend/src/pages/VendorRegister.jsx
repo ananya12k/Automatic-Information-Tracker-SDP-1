@@ -10,16 +10,19 @@ const VendorRegister = () => {
  const [hostelData, setHostelData] = useState(null);
  const [hostelPGData, setHostelPGData] = useState(null);
  const [tiffinData, setTiffinData] = useState(null);
+ const [name, setName] = useState("");
+ const [email, setEmail] = useState("");
+ const [phone, setPhone] = useState("");
+ const [address, setAddress] = useState("");
  const navigate = useNavigate();
 
  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Construct formData based on selectedType
     let formData = {
-      name: document.getElementById("form10Example1").value,
-      email: document.getElementById("form10Example2").value,
-      phone: document.getElementById("form10Example3").value,
-      address: document.getElementById("form10Example4").value,
+      name,
+      email,
+      phone,
+      address,
       type_of_business: selectedType,
     };
 
@@ -31,7 +34,6 @@ const VendorRegister = () => {
       formData = { ...formData, ...tiffinData };
     }
 
-    // Send formData to the backend
     try {
       const response = await fetch("http://127.0.0.1:8000/service/register/", {
         method: "POST",
@@ -56,19 +58,19 @@ const VendorRegister = () => {
       <form onSubmit={handleSubmit}>
         <MDBRow>
           <MDBCol>
-            <MDBInput id="form10Example1" label="Name" />
+            <MDBInput label="Name" value={name} onChange={(e) => setName(e.target.value)} />
           </MDBCol>
           <MDBCol>
-            <MDBInput id="form10Example2" label="Email address" type="email" />
+            <MDBInput label="Email address" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           </MDBCol>
         </MDBRow>
 
         <MDBRow>
           <MDBCol>
-            <MDBInput id="form10Example3" label="Phone Number" type="tel" />
+            <MDBInput label="Phone Number" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
           </MDBCol>
           <MDBCol>
-            <MDBInput id="form10Example4" label="Address" />
+            <MDBInput label="Address" value={address} onChange={(e) => setAddress(e.target.value)} />
           </MDBCol>
         </MDBRow>
 
