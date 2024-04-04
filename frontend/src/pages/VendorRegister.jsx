@@ -20,16 +20,14 @@ const VendorRegister = () => {
   const [hostelPGData, setHostelPGData] = useState(null);
 
   const [selectedType, setSelectedType] = useState(""); // State to store selected type
-  const [documents, setDocuments] = useState([]);
+
   const [hostelData, setHostelData] = useState(null);
   const [tiffinData, setTiffinData] = useState(null);
   const handleTiffinData = (data) => {
     setTiffinData(data);
   };
-  // State to store data from HostelVen
-  const handleHostelData = (data) => {
-    setHostelData(data);
-  };
+  const [documents, setDocuments] = useState([]);
+
   const handleDocumentUpload = (selectedFiles) => {
     setDocuments(selectedFiles);
   };
@@ -39,10 +37,7 @@ const VendorRegister = () => {
     updatedDocuments.splice(index, 1);
     setDocuments(updatedDocuments);
   };
-  const handleHostelPGData = (data) => {
-    // Handle the data received from HostelPGVen component
-    console.log("Hostel/PG data:", data);
-  };
+
   const getFileIcon = (fileName) => {
     const extension = fileName.split(".").pop();
     switch (extension.toLowerCase()) {
@@ -60,6 +55,16 @@ const VendorRegister = () => {
     console.log("Uploading documents:", documents);
     // Clear documents state after upload if needed
     setDocuments([]);
+  };
+
+  // State to store data from HostelVen
+  const handleHostelData = (data) => {
+    setHostelData(data);
+  };
+
+  const handleHostelPGData = (data) => {
+    // Handle the data received from HostelPGVen component
+    console.log("Hostel/PG data:", data);
   };
 
   const handleRadioChange = (e) => {
@@ -270,7 +275,10 @@ const VendorRegister = () => {
                         <img
                           src={URL.createObjectURL(file)}
                           alt={`Preview ${index}`}
-                          style={{ maxWidth: "100px", maxHeight: "100px" }}
+                          style={{
+                            maxWidth: "100px",
+                            maxHeight: "100px",
+                          }}
                         />
                         <MDBIcon
                           icon="trash-alt"
@@ -296,6 +304,7 @@ const VendorRegister = () => {
               </ul>
             </div>
           )}
+
           <hr />
         </form>
         <div className="d-flex justify-content-center mt-4">

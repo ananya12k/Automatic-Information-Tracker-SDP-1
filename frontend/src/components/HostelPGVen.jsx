@@ -20,7 +20,7 @@ const HostelPGVen = ({ onHostelPGData }) => {
   const [prices, setPrices] = useState([]);
   const [selectedCombination, setSelectedCombination] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
-
+  const [amenities, setAmenities] = useState([]);
   const handleDocumentUpload = (e) => {
     const selectedFiles = Array.from(e.target.files);
     const filteredFiles = selectedFiles.filter((file) => {
@@ -96,6 +96,29 @@ const HostelPGVen = ({ onHostelPGData }) => {
       setSelectedPrice("");
     }
   };
+  const handleAmenityChange = (e) => {
+    const { id, checked } = e.target;
+    if (checked) {
+      setAmenities((prevAmenities) => [...prevAmenities, id]);
+    } else {
+      setAmenities((prevAmenities) =>
+        prevAmenities.filter((amenity) => amenity !== id)
+      );
+    }
+  };
+
+  // const getSelectedAmenities = () => {
+  //   const selectedAmenities = [];
+  //   const amenityCheckboxes = document.querySelectorAll(
+  //     'input[type="checkbox"][id^="amenity"]'
+  //   );
+  //   amenityCheckboxes.forEach((checkbox) => {
+  //     if (checkbox.checked) {
+  //       selectedAmenities.push(checkbox.id.substring(7)); // Remove "amenity" prefix
+  //     }
+  //   });
+  //   return selectedAmenities;
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -106,7 +129,18 @@ const HostelPGVen = ({ onHostelPGData }) => {
       acRoom,
       foodIncluded,
       prices,
-      // Add other data properties as needed
+      longitude: document.getElementById("longitude").value,
+      latitude: document.getElementById("latitude").value,
+      amenities, // Include selected amenities
+      rulesAndRegulations: document.getElementById("rulesAndRegulations").value,
+      inTime: document.getElementById("inTime").value,
+      pickAndDrop: document.getElementById("pickAndDrop").checked,
+      policeVerification: document.getElementById("policeVerification").checked,
+      // Add photos property
+      photos: documents
+        .filter((file) => file.type.startsWith("image/"))
+        .map((file) => URL.createObjectURL(file)),
+      // Include other properties as needed
     };
     onHostelPGData(hostelPGData);
   };
@@ -196,9 +230,121 @@ const HostelPGVen = ({ onHostelPGData }) => {
         onChange={() => setFoodIncluded(!foodIncluded)}
       />
       <hr />
+      <MDBInput
+        type="textarea"
+        label="Rules and Regulations"
+        id="rulesAndRegulations"
+      />
+      <hr />
+      In-Time: <MDBInput type="time" id="inTime" />
+      <hr />
+      <h4>Select Amenities:</h4>
+      {[
+        "Wifi",
+        "Laundry",
+        "Housekeeping",
+        "Security",
+        "Parking",
+        "Gym",
+        "Swimming Pool",
+        "Power Backup",
+        "Water Supply",
+        "Elevator",
+        "CCTV",
+        "Fire Safety",
+        "Study Table",
+        "Bed",
+        "Cupboard",
+        "Attached Bathroom",
+        "Hot Water",
+        "Geyser",
+        "TV",
+        "Refrigerator",
+        "Microwave",
+        "Kitchen",
+      ].map((amenity) => (
+        <MDBCheckbox
+          label={amenity}
+          id={`${amenity}`}
+          key={amenity}
+          onChange={handleAmenityChange}
+        />
+      ))}
+      <MDBCheckbox label="Pick and Drop" id="pickAndDrop" />
+      <MDBCheckbox label="Police Verification" id="policeVerification" />
+      <hr />
+      <MDBBtn
+        color="primary"
+        onClick={() => {
+          document.getElementById("documentUpload").click();
+        }}
+      >
+        <MDBIcon fas icon="upload" /> Upload Images
+      </MDBBtn>
+      {/* Input element for file upload */}
+      <input
+        type="file"
+        accept=".jpg, .jpeg, .png, .pdf, .docx"
+        multiple
+        onChange={handleDocumentUpload}
+        style={{ display: "none" }}
+        id="documentUpload"
+      />
+      <hr />
+      {documents.length > 0 && (
+        <div>
+          <h4>Uploaded Documents:</h4>
+          <ul>
+            {documents.map((file, index) => (
+              <li key={index}>
+                {/* Check if the file type is an image */}
+                {file.type.startsWith("image/") ? (
+                  // If it's an image, display the image preview
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                      src={URL.createObjectURL(file)}
+                      alt={`Preview ${index}`}
+                      style={{ maxWidth: "100px", maxHeight: "100px" }}
+                    />
+                    <MDBIcon
+                      far
+                      icon="trash-alt"
+                      className="ml-2"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleDeleteDocument(index)}
+                    />
+                  </div>
+                ) : (
+                  // If it's not an image, display an icon based on the file type
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <i
+                      className={`fa ${getFileIcon(file.name)} fa-2x`}
+                      style={{ marginRight: "10px" }}
+                    />
+                    <span>{file.name}</span>
+                    <MDBIcon
+                      far
+                      icon="trash-alt"
+                      className="ml-2"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleDeleteDocument(index)}
+                    />
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      <hr />
+      <MDBInput type="text" label="Longitude" id="longitude" />
+      <hr />
+      <MDBInput type="text" label="Latitude" id="latitude" />
+      <hr />
       <MDBBtn rounded color="primary" onClick={handleSubmit}>
         Add Hostel/PG Details
       </MDBBtn>
+      <hr />
     </>
   );
 };
