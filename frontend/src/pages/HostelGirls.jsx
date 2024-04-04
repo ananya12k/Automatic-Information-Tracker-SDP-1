@@ -51,6 +51,8 @@ const HostelGirls = () => {
             images={hostel.Images}
             latitude={hostel.Latitude}
             longitude={hostel.Longitude}
+            type={hostel.Type}
+
           />
         ))
       )}

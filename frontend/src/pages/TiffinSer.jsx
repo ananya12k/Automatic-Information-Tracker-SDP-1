@@ -36,7 +36,7 @@ const TiffinSer = () => {
 
   return (
     <>
-      <NavBar/>
+      <NavBar />
       {tiffins &&
         tiffins.length > 0 &&
         tiffins.map((tiffin) => (
@@ -46,6 +46,8 @@ const TiffinSer = () => {
             rating={tiffin.Rating}
             phone={tiffin.Phone}
             thumbnail={tiffin.Thumbnail}
+            latitude={tiffin.Latitude}
+            longitude={tiffin.Longitude}
           />
         ))}
     </>

@@ -45,6 +45,9 @@ const PgService = () => {
           address={x.Address}
           phone={x.Phone}
           thumbnail={x.Thumbnail}
+          type={x.Type}
+          latitude={x.Latitude}
+          longitude={x.Longitude}
         />
       ))}
     </>

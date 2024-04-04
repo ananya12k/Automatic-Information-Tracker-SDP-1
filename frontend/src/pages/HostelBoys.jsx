@@ -3,19 +3,19 @@ import Card from "../components/Card";
 // import NavBarServices from "../components/NavBarServices";
 import NavBar from "../components/NavBar";
 const HostelBoys = () => {
- const [hostels, setHostels] = useState([]);
+  const [hostels, setHostels] = useState([]);
 
- useEffect(() => {
-    fetch('http://127.0.0.1:8000/data/boys-hostels/') 
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/data/boys-hostels/')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        return response.text(); 
+        return response.text();
       })
       .then(text => {
         const cleanedText = text.replace(/NaN/g, 'null');
-        return JSON.parse(cleanedText); 
+        return JSON.parse(cleanedText);
       })
       .then(data => {
         setHostels(data);
@@ -23,23 +23,26 @@ const HostelBoys = () => {
       .catch(error => {
         console.error('There has been a problem with your fetch operation:', error);
       });
- }, []);
+  }, []);
 
- return (
+  return (
     <>
       <NavBar />
       {hostels.map((hostel, index) => (
         <Card
-          key={index} 
+          key={index}
           name={hostel.Name}
           address={hostel.Address}
           rating={hostel.Rating}
           phone={hostel.Phone}
           thumbnail={hostel.Thumbnail}
+          type={hostel.Type}
+          latitude={hostel.Latitude}
+          longitude={hostel.Longitude}
         />
       ))}
     </>
- );
+  );
 };
 
 export default HostelBoys;
