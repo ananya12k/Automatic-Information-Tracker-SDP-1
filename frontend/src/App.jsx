@@ -20,6 +20,7 @@ import ReviewModal from "./components/ReviewModal";
 import Rating from "./components/Rating";
 import UserProfile from "./components/UserProfile";
 import OnClick from "./pages/OnClick";
+import VendorProfilePage from "./pages/VendorProfilePage";
 
 function App() {
   return (
@@ -46,11 +47,11 @@ function App() {
           <Route path="/register" element={<SignUp />} />
           <Route path="/vendordash" element={<VendorDash />} />
           <Route path="/vendorreg" element={<VendorRegister />} />
+          <Route path="/vendorprofile" element={<VendorProfilePage />} />
           {/* <Route path="/review" element={<ReviewModal />} />
           <Route path="/rating" element={<Rating />} /> */}
           {/* <Route path="/userprofile" element={<UserProfile />} /> */}
           <Route path="/details" element={<OnClick />} />
-         
         </Routes>
       </Router>
     </>

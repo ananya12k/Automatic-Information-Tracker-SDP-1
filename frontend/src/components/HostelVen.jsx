@@ -4,12 +4,34 @@ import {
   MDBDropdownMenu,
   MDBDropdownItem,
   MDBCheckbox,
+  MDBBtn,
 } from "mdb-react-ui-kit";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
-const HostelVen = () => {
+const HostelVen = (props) => {
   const [wardenPresent, setWardenPresent] = useState(false);
   const [wardenCount, setWardenCount] = useState(0);
+
+  const getTimePeriod = () => {
+    const timePeriodCheckboxes = document.getElementsByName("inlineCheck");
+    const selectedTimePeriod = [];
+    timePeriodCheckboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        selectedTimePeriod.push(checkbox.nextSibling.textContent.trim());
+      }
+    });
+    return selectedTimePeriod;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.onHostelData({
+      timePeriod: getTimePeriod(),
+      wardenPresent: wardenPresent,
+      wardenCount: wardenCount,
+    });
+  };
 
   const handleWardenToggle = () => {
     setWardenPresent(!wardenPresent);
@@ -18,6 +40,7 @@ const HostelVen = () => {
   const handleWardenSelection = (value) => {
     setWardenPresent(value === "Yes");
   };
+
   const handleWardenCountChange = (e) => {
     setWardenCount(e.target.value);
   };
@@ -88,8 +111,18 @@ const HostelVen = () => {
         </div>
       )}
       <hr />
+      <MDBBtn rounded onClick={() => handleSubmit(wardenPresent, wardenCount)}>
+        Add Warden Details
+      </MDBBtn>
+      <hr />
     </>
   );
 };
-
+HostelVen.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  // Other propTypes...
+};
+HostelVen.propTypes = {
+  onHostelData: PropTypes.func.isRequired, // Validate onHostelData prop as a function
+};
 export default HostelVen;

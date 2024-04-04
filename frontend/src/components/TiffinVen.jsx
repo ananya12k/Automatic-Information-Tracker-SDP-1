@@ -1,20 +1,18 @@
 import { useState } from "react";
-import {
-  MDBBtn,
-  MDBIcon,
-  MDBTooltip,
-  MDBInput,
-  MDBRadio,
-} from "mdb-react-ui-kit";
+import PropTypes from "prop-types"; // Import PropTypes
+import { MDBBtn, MDBIcon, MDBTooltip, MDBRadio } from "mdb-react-ui-kit";
 
-const TiffinVen = () => {
+const TiffinVen = ({ onTiffinData }) => {
+  // Step 1: Define onTiffinData prop
   const [menu, setMenu] = useState(null);
   const [menuPreview, setMenuPreview] = useState(null);
+  const [isVegetarian, setIsVegetarian] = useState(null);
+  const [isDeliveryAvailable, setIsDeliveryAvailable] = useState(null);
 
   const handleMenuUpload = (e) => {
     const selectedFile = e.target.files[0];
     setMenu(selectedFile);
-    setMenuPreview(URL.createObjectURL(selectedFile)); // Create a preview URL for the file
+    setMenuPreview(URL.createObjectURL(selectedFile));
   };
 
   const handleDeleteMenu = () => {
@@ -25,21 +23,65 @@ const TiffinVen = () => {
   const handleUploadMenu = () => {
     // Logic to handle menu upload
     console.log("Uploading menu:", menu);
+
+    // Call the onTiffinData function with the tiffin-specific data
+    onTiffinData({
+      menu: menu,
+      menuPreview: menuPreview,
+    });
+
     // Reset the menu state after upload if needed
     setMenu(null);
     setMenuPreview(null);
+  };
+
+  const handleSubmit = () => {
+    // Call the onTiffinData function with the tiffin-specific data
+    onTiffinData({
+      isVegetarian: isVegetarian,
+      isDeliveryAvailable: isDeliveryAvailable,
+      // Include any other relevant data from TiffinVen component
+    });
   };
 
   return (
     <>
       <hr />
       <h5>Vegetarian</h5>
-      <MDBRadio name="veg" id="Veg" label="Yes" inline />
-      <MDBRadio name="veg" id="NonVeg" label="No" inline />
+      <MDBRadio
+        name="veg"
+        id="Veg"
+        label="Yes"
+        inline
+        checked={isVegetarian === true}
+        onChange={() => setIsVegetarian(true)}
+      />
+      <MDBRadio
+        name="veg"
+        id="NonVeg"
+        label="No"
+        inline
+        checked={isVegetarian === false}
+        onChange={() => setIsVegetarian(false)}
+      />
       <hr />
       <h5>Delivery</h5>
-      <MDBRadio name="delivery" id="delivery1" label="Yes" inline />
-      <MDBRadio name="delivery" id="delivery2" label="No" inline />
+      <MDBRadio
+        name="delivery"
+        id="delivery1"
+        label="Yes"
+        inline
+        checked={isDeliveryAvailable === true}
+        onChange={() => setIsDeliveryAvailable(true)}
+      />
+      <MDBRadio
+        name="delivery"
+        id="delivery2"
+        label="No"
+        inline
+        checked={isDeliveryAvailable === false}
+        onChange={() => setIsDeliveryAvailable(false)}
+      />
       <span className="d-flex justify-content-center mt-4">
         <MDBBtn rounded style={{ marginRight: 10 }}>
           <label htmlFor="menuUpload" style={{ cursor: "pointer" }}>
@@ -64,7 +106,6 @@ const TiffinVen = () => {
       </span>
       {menu && (
         <div>
-          {/* Display file preview based on file type */}
           {menu.type.startsWith("image/") ? (
             <div>
               <img
@@ -82,6 +123,7 @@ const TiffinVen = () => {
             </div>
           ) : (
             <div>
+              <hr />
               <p>Uploaded Menu: {menu.name}</p>
               <MDBIcon
                 far
@@ -94,9 +136,16 @@ const TiffinVen = () => {
           )}
         </div>
       )}
-      {/* Your existing content */}
+      <div className="d-flex justify-content-center mt-4">
+        <MDBBtn rounded onClick={handleSubmit}>
+          Submit
+        </MDBBtn>
+      </div>
     </>
   );
+};
+TiffinVen.propTypes = {
+  onTiffinData: PropTypes.func.isRequired, // Step 3: PropTypes validation for onTiffinData prop
 };
 
 export default TiffinVen;

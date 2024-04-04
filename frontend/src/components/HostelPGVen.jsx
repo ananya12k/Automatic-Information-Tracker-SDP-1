@@ -9,9 +9,17 @@ import {
   MDBDropdownMenu,
   MDBDropdownItem,
 } from "mdb-react-ui-kit";
+import PropTypes from "prop-types";
 
-const HostelPGVen = () => {
+const HostelPGVen = ({ onHostelPGData }) => {
   const [documents, setDocuments] = useState([]);
+  const [sharedRooms, setSharedRooms] = useState(false);
+  const [roommates, setRoommates] = useState([]);
+  const [acRoom, setAcRoom] = useState(false);
+  const [foodIncluded, setFoodIncluded] = useState(false);
+  const [prices, setPrices] = useState([]);
+  const [selectedCombination, setSelectedCombination] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState("");
 
   const handleDocumentUpload = (e) => {
     const selectedFiles = Array.from(e.target.files);
@@ -44,17 +52,9 @@ const HostelPGVen = () => {
     }
   };
 
-  const [sharedRooms, setSharedRooms] = useState(false);
-
   const handleSharedRoomsChange = () => {
     setSharedRooms(!sharedRooms);
   };
-  const [roommates, setRoommates] = useState([]);
-  const [acRoom, setAcRoom] = useState(false);
-  const [foodIncluded, setFoodIncluded] = useState(false);
-  const [prices, setPrices] = useState([]);
-  const [selectedCombination, setSelectedCombination] = useState("");
-  const [selectedPrice, setSelectedPrice] = useState("");
 
   const handleRoommatesChange = (e) => {
     const { value, checked } = e.target;
@@ -97,6 +97,20 @@ const HostelPGVen = () => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const hostelPGData = {
+      documents,
+      sharedRooms,
+      roommates,
+      acRoom,
+      foodIncluded,
+      prices,
+      // Add other data properties as needed
+    };
+    onHostelPGData(hostelPGData);
+  };
+
   return (
     <>
       <hr />
@@ -111,7 +125,6 @@ const HostelPGVen = () => {
         </MDBDropdownMenu>
       </MDBDropdown>
       <hr />
-      {/* Render content based on sharedRooms state */}
       {!sharedRooms ? (
         <div>
           <p>No shared rooms are available.</p>
@@ -183,109 +196,15 @@ const HostelPGVen = () => {
         onChange={() => setFoodIncluded(!foodIncluded)}
       />
       <hr />
-      <MDBInput type="textarea" label="Rules and Regulations" />
-      <hr />
-      In-Time: <MDBInput type="time" />
-      <hr />
-      <h4>Select Amenities:</h4>
-      {[
-        "Wifi",
-        "Laundry",
-        "Housekeeping",
-        "Security",
-        "Parking",
-        "Gym",
-        "Swimming Pool",
-        "Power Backup",
-        "Water Supply",
-        "Elevator",
-        "CCTV",
-        "Fire Safety",
-        "Study Table",
-        "Bed",
-        "Cupboard",
-        "Attached Bathroom",
-        "Hot Water",
-        "Geyser",
-        "TV",
-        "Refrigerator",
-        "Microwave",
-        "Kitchen",
-      ].map((amenity) => (
-        <MDBCheckbox label={amenity} id={amenity} key={amenity} />
-      ))}
-      <MDBCheckbox label="Pick and Drop" id="pickAndDrop" />
-      <MDBCheckbox label="Police Verification" id="policeVerification" />
-      <hr />
-      <MDBBtn
-        color="primary"
-        onClick={() => {
-          document.getElementById("documentUpload").click();
-        }}
-      >
-        <MDBIcon fas icon="upload" /> Upload Images
+      <MDBBtn rounded color="primary" onClick={handleSubmit}>
+        Add Hostel/PG Details
       </MDBBtn>
-      {/* Input element for file upload */}
-      <input
-        type="file"
-        accept=".jpg, .jpeg, .png, .pdf, .docx"
-        multiple
-        onChange={handleDocumentUpload}
-        style={{ display: "none" }}
-        id="documentUpload"
-      />
-      <hr />
-      {documents.length > 0 && (
-        <div>
-          <h4>Uploaded Documents:</h4>
-          <ul>
-            {documents.map((file, index) => (
-              <li key={index}>
-                {/* Check if the file type is an image */}
-                {file.type.startsWith("image/") ? (
-                  // If it's an image, display the image preview
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <img
-                      src={URL.createObjectURL(file)}
-                      alt={`Preview ${index}`}
-                      style={{ maxWidth: "100px", maxHeight: "100px" }}
-                    />
-                    <MDBIcon
-                      far
-                      icon="trash-alt"
-                      className="ml-2"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => handleDeleteDocument(index)}
-                    />
-                  </div>
-                ) : (
-                  // If it's not an image, display an icon based on the file type
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <i
-                      className={`fa ${getFileIcon(file.name)} fa-2x`}
-                      style={{ marginRight: "10px" }}
-                    />
-                    <span>{file.name}</span>
-                    <MDBIcon
-                      far
-                      icon="trash-alt"
-                      className="ml-2"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => handleDeleteDocument(index)}
-                    />
-                  </div>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      <hr />
-      <MDBInput type="text" label="Longitude" />
-      <hr />
-      <MDBInput type="text" label="Latitude" />
     </>
   );
+};
+
+HostelPGVen.propTypes = {
+  onHostelPGData: PropTypes.func.isRequired,
 };
 
 export default HostelPGVen;

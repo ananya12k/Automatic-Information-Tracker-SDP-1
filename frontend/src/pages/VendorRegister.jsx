@@ -1,14 +1,14 @@
 import MyButton from "../components/MyButton";
 import VendorNav from "../components/VendorNav";
-
+import { useNavigate } from "react-router-dom";
 import {
   MDBContainer,
-  MDBBtn,
   MDBRow,
   MDBCol,
   MDBIcon,
   MDBInput,
   MDBRadio,
+  MDBBtn,
 } from "mdb-react-ui-kit";
 import { useState } from "react";
 import HostelVen from "../components/HostelVen";
@@ -17,9 +17,19 @@ import PGVen from "../components/PGVen";
 import TiffinVen from "../components/TiffinVen";
 
 const VendorRegister = () => {
+  const [hostelPGData, setHostelPGData] = useState(null);
+
   const [selectedType, setSelectedType] = useState(""); // State to store selected type
   const [documents, setDocuments] = useState([]);
-
+  const [hostelData, setHostelData] = useState(null);
+  const [tiffinData, setTiffinData] = useState(null);
+  const handleTiffinData = (data) => {
+    setTiffinData(data);
+  };
+  // State to store data from HostelVen
+  const handleHostelData = (data) => {
+    setHostelData(data);
+  };
   const handleDocumentUpload = (selectedFiles) => {
     setDocuments(selectedFiles);
   };
@@ -29,7 +39,10 @@ const VendorRegister = () => {
     updatedDocuments.splice(index, 1);
     setDocuments(updatedDocuments);
   };
-
+  const handleHostelPGData = (data) => {
+    // Handle the data received from HostelPGVen component
+    console.log("Hostel/PG data:", data);
+  };
   const getFileIcon = (fileName) => {
     const extension = fileName.split(".").pop();
     switch (extension.toLowerCase()) {
@@ -53,10 +66,109 @@ const VendorRegister = () => {
     e.preventDefault(); // Prevent default form submission
     setSelectedType(e.target.value);
   };
+  const navigate = useNavigate();
+  const handleSubmit = async (e, selectedType, documents) => {
+    e.preventDefault();
+    try {
+      let formData;
+      switch (selectedType) {
+        case "hostel":
+          formData = {
+            name: document.getElementById("form10Example1").value,
+            email: document.getElementById("form10Example2").value,
+            phoneNumber: document.getElementById("form10Example3").value,
+            address: document.getElementById("form10Example4").value,
+            type: selectedType,
+            hostelData: hostelData,
+            hostelPGData: hostelPGData,
+            documents: documents.map((file) => ({
+              name: file.name,
+              type: file.type,
+              // Add any other relevant file properties here
+            })),
+          };
+          break;
+        case "pg":
+          formData = {
+            name: document.getElementById("form10Example1").value,
+            email: document.getElementById("form10Example2").value,
+            phoneNumber: document.getElementById("form10Example3").value,
+            address: document.getElementById("form10Example4").value,
+            type: selectedType,
+            hostelPGData: hostelPGData,
+            pgData: {
+              depositOptions: getDepositOptions(),
+              noticePeriod: getNoticePeriod(),
+            },
+            documents: documents.map((file) => ({
+              name: file.name,
+              type: file.type,
+              // Add any other relevant file properties here
+            })),
+          };
+          break;
+        case "tiffin":
+          formData = {
+            name: document.getElementById("form10Example1").value,
+            email: document.getElementById("form10Example2").value,
+            phoneNumber: document.getElementById("form10Example3").value,
+            address: document.getElementById("form10Example4").value,
+            type: selectedType,
+            tiffinData: tiffinData,
+            documents: documents.map((file) => ({
+              name: file.name,
+              type: file.type,
+              // Add any other relevant file properties here
+            })),
+          };
+          break;
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission
-    // Handle form submission logic here
+        default:
+          console.error("Invalid vendor type");
+          return;
+      }
+
+      const response = await fetch("http://127.0.0.1:8000/service/register/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        navigate("/vendorprofile"); // Navigate to VendorProfilePage
+      } else {
+        // Handle error response
+        console.error("Error:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
+  const getDepositOptions = () => {
+    const depositOptions = [];
+    const rent1 = document.getElementById("radio1Rent").checked;
+    const rent2 = document.getElementById("radio2Rent").checked;
+    if (rent1) {
+      depositOptions.push("1 Rent");
+    }
+    if (rent2) {
+      depositOptions.push("2 Rent");
+    }
+    return depositOptions;
+  };
+
+  // Function to get selected notice period
+  const getNoticePeriod = () => {
+    const noticePeriodRadioButtons = document.getElementsByName("noticePeriod");
+    let selectedNoticePeriod = "";
+    noticePeriodRadioButtons.forEach((radioButton) => {
+      if (radioButton.checked) {
+        selectedNoticePeriod = radioButton.nextSibling.textContent.trim();
+      }
+    });
+    return selectedNoticePeriod;
   };
 
   return (
@@ -100,9 +212,13 @@ const VendorRegister = () => {
                 checked={selectedType === "hostel"} // Set checked based on state
                 onChange={handleRadioChange}
               />
-              {selectedType === "hostel" && <HostelVen />}{" "}
+              {selectedType === "hostel" && (
+                <HostelVen onHostelData={handleHostelData} />
+              )}{" "}
               {/* Show HostelVen component if hostel */}
-              {selectedType === "hostel" && <HostelPGVen />}{" "}
+              {selectedType === "hostel" && (
+                <HostelPGVen onHostelPGData={handleHostelPGData} />
+              )}{" "}
               {/* Show HostelPGVen component if hostel */}
             </MDBCol>
             <MDBCol>
@@ -116,7 +232,9 @@ const VendorRegister = () => {
                 onChange={handleRadioChange}
               />
               {selectedType === "pg" && <PGVen />}{" "}
-              {selectedType === "pg" && <HostelPGVen />}{" "}
+              {selectedType === "pg" && (
+                <HostelPGVen onHostelPGData={handleHostelPGData} />
+              )}{" "}
             </MDBCol>
             <MDBCol>
               <MDBRadio
@@ -128,7 +246,9 @@ const VendorRegister = () => {
                 checked={selectedType === "tiffin"} // Set checked based on state
                 onChange={handleRadioChange}
               />
-              {selectedType === "tiffin" && <TiffinVen />}{" "}
+              {selectedType === "tiffin" && (
+                <TiffinVen onTiffinData={handleTiffinData} />
+              )}{" "}
               {/* Show TiffinVen component if tiffin */}
             </MDBCol>
           </MDBRow>
@@ -178,7 +298,11 @@ const VendorRegister = () => {
           )}
           <hr />
         </form>
-
+        <div className="d-flex justify-content-center mt-4">
+          <MDBBtn rounded onClick={handleSubmit}>
+            Submit
+          </MDBBtn>
+        </div>
         <br />
       </MDBContainer>
     </>
