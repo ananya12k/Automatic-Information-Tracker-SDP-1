@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
-const Rating = () => {
+const Rating = ({ onRatingChange }) => {
  const [rating, setRating] = useState(null);
  const [hover, setHover] = useState(null);
 
  const handleRating = (value) => {
     setRating(value);
+    onRatingChange(value); 
  };
 
  const handleMouseOver = (value) => {
