@@ -9,10 +9,17 @@ import {
 
 const TiffinVen = () => {
   const [menu, setMenu] = useState(null);
+  const [menuPreview, setMenuPreview] = useState(null);
 
   const handleMenuUpload = (e) => {
     const selectedFile = e.target.files[0];
     setMenu(selectedFile);
+    setMenuPreview(URL.createObjectURL(selectedFile)); // Create a preview URL for the file
+  };
+
+  const handleDeleteMenu = () => {
+    setMenu(null);
+    setMenuPreview(null);
   };
 
   const handleUploadMenu = () => {
@@ -20,6 +27,7 @@ const TiffinVen = () => {
     console.log("Uploading menu:", menu);
     // Reset the menu state after upload if needed
     setMenu(null);
+    setMenuPreview(null);
   };
 
   return (
@@ -56,10 +64,34 @@ const TiffinVen = () => {
       </span>
       {menu && (
         <div>
-          {/* Display the name of the uploaded file */}
-          <p>Uploaded Menu: {menu.name}</p>
-          {/* If needed, provide an option to remove the uploaded menu */}
-          {/* <MDBBtn color="danger" onClick={() => setMenu(null)}>Remove Menu</MDBBtn> */}
+          {/* Display file preview based on file type */}
+          {menu.type.startsWith("image/") ? (
+            <div>
+              <img
+                src={menuPreview}
+                alt="Menu Preview"
+                style={{ maxWidth: "100%" }}
+              />
+              <MDBIcon
+                far
+                icon="trash-alt"
+                className="ml-2"
+                style={{ cursor: "pointer" }}
+                onClick={handleDeleteMenu}
+              />
+            </div>
+          ) : (
+            <div>
+              <p>Uploaded Menu: {menu.name}</p>
+              <MDBIcon
+                far
+                icon="trash-alt"
+                className="ml-2"
+                style={{ cursor: "pointer" }}
+                onClick={handleDeleteMenu}
+              />
+            </div>
+          )}
         </div>
       )}
       {/* Your existing content */}

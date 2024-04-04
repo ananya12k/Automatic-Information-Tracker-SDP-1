@@ -24,6 +24,24 @@ const VendorRegister = () => {
     setDocuments(selectedFiles);
   };
 
+  const handleDeleteDocument = (index) => {
+    const updatedDocuments = [...documents];
+    updatedDocuments.splice(index, 1);
+    setDocuments(updatedDocuments);
+  };
+
+  const getFileIcon = (fileName) => {
+    const extension = fileName.split(".").pop();
+    switch (extension.toLowerCase()) {
+      case "pdf":
+        return "fa-file-pdf";
+      case "docx":
+        return "fa-file-word";
+      default:
+        return "fa-file";
+    }
+  };
+
   const handleUploadDocuments = () => {
     // Handle document upload logic here
     console.log("Uploading documents:", documents);
@@ -115,8 +133,50 @@ const VendorRegister = () => {
             </MDBCol>
           </MDBRow>
 
-          <hr />
           <MyButton onUpload={handleDocumentUpload} />
+          <hr />
+
+          {/* Render uploaded documents with previews */}
+          {documents.length > 0 && (
+            <div>
+              <h4>Uploaded Documents:</h4>
+              <ul>
+                {documents.map((file, index) => (
+                  <li key={index}>
+                    {/* Check if the file type is an image */}
+                    {file.type.startsWith("image/") ? (
+                      // If it's an image, display the image preview
+                      <>
+                        <img
+                          src={URL.createObjectURL(file)}
+                          alt={`Preview ${index}`}
+                          style={{ maxWidth: "100px", maxHeight: "100px" }}
+                        />
+                        <MDBIcon
+                          icon="trash-alt"
+                          className="ml-2"
+                          style={{ cursor: "pointer" }}
+                          onClick={() => handleDeleteDocument(index)}
+                        />
+                      </>
+                    ) : (
+                      // If it's not an image, display an icon based on the file type
+                      <>
+                        <i className={`fa ${getFileIcon(file.name)} fa-2x`} />
+                        <MDBIcon
+                          icon="trash-alt"
+                          className="ml-2"
+                          style={{ cursor: "pointer" }}
+                          onClick={() => handleDeleteDocument(index)}
+                        />
+                      </>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <hr />
         </form>
 
         <br />

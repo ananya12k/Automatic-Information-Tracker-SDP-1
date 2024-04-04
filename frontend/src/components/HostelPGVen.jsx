@@ -23,7 +23,25 @@ const HostelPGVen = () => {
         fileType === "image/png"
       );
     });
-    setDocuments(filteredFiles);
+    setDocuments((prevDocuments) => [...prevDocuments, ...filteredFiles]);
+  };
+
+  const handleDeleteDocument = (index) => {
+    setDocuments((prevDocuments) =>
+      prevDocuments.filter((_, i) => i !== index)
+    );
+  };
+
+  const getFileIcon = (fileName) => {
+    const extension = fileName.split(".").pop();
+    switch (extension.toLowerCase()) {
+      case "pdf":
+        return "fa-file-pdf";
+      case "docx":
+        return "fa-file-word";
+      default:
+        return "fa-file";
+    }
   };
 
   const [sharedRooms, setSharedRooms] = useState(false);
@@ -216,6 +234,52 @@ const HostelPGVen = () => {
         style={{ display: "none" }}
         id="documentUpload"
       />
+      <hr />
+      {documents.length > 0 && (
+        <div>
+          <h4>Uploaded Documents:</h4>
+          <ul>
+            {documents.map((file, index) => (
+              <li key={index}>
+                {/* Check if the file type is an image */}
+                {file.type.startsWith("image/") ? (
+                  // If it's an image, display the image preview
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                      src={URL.createObjectURL(file)}
+                      alt={`Preview ${index}`}
+                      style={{ maxWidth: "100px", maxHeight: "100px" }}
+                    />
+                    <MDBIcon
+                      far
+                      icon="trash-alt"
+                      className="ml-2"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleDeleteDocument(index)}
+                    />
+                  </div>
+                ) : (
+                  // If it's not an image, display an icon based on the file type
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <i
+                      className={`fa ${getFileIcon(file.name)} fa-2x`}
+                      style={{ marginRight: "10px" }}
+                    />
+                    <span>{file.name}</span>
+                    <MDBIcon
+                      far
+                      icon="trash-alt"
+                      className="ml-2"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleDeleteDocument(index)}
+                    />
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <hr />
       <MDBInput type="text" label="Longitude" />
       <hr />
