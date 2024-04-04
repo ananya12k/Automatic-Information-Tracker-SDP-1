@@ -6,11 +6,24 @@ import {
   MDBCheckbox,
 } from "mdb-react-ui-kit";
 import { useState } from "react";
+
 const HostelVen = () => {
   const [wardenPresent, setWardenPresent] = useState(false);
   const [wardenCount, setWardenCount] = useState(0);
+
+  const handleWardenToggle = () => {
+    setWardenPresent(!wardenPresent);
+  };
+
+  const handleWardenSelection = (value) => {
+    setWardenPresent(value === "Yes");
+  };
+  const handleWardenCountChange = (e) => {
+    setWardenCount(e.target.value);
+  };
   return (
     <>
+      <hr />
       {/* Create checkboxes of Time period for 1 month, 3 months, 6 months, 1 year in one line */}
       <MDBCheckbox
         name="inlineCheck"
@@ -44,23 +57,36 @@ const HostelVen = () => {
 
       {/* Create drop down of Warden present yes or no  on conditional rendering if yes the input for no of warden is selected*/}
       <MDBDropdown>
-        <MDBDropdownToggle caret>Warden Present</MDBDropdownToggle>
+        <MDBDropdownToggle caret={true.toString()} color="primary">
+          Warden Present
+        </MDBDropdownToggle>
         <MDBDropdownMenu>
-          <MDBDropdownItem onClick={() => setWardenPresent(true)}>
+          <MDBDropdownItem onClick={() => handleWardenSelection("Yes")}>
             Yes
           </MDBDropdownItem>
-          <MDBDropdownItem onClick={() => setWardenPresent(false)}>
+          <MDBDropdownItem onClick={() => handleWardenSelection("No")}>
             No
           </MDBDropdownItem>
         </MDBDropdownMenu>
-        {wardenPresent && (
-          <input
-            type="number"
-            placeholder="Number of wardens"
-            onChange={(e) => setWardenCount(e.target.value)}
-          />
-        )}
       </MDBDropdown>
+
+      {/* Render input for number of wardens if wardenPresent is true */}
+      {wardenPresent && (
+        <input
+          type="number"
+          placeholder="Number of wardens"
+          value={wardenCount}
+          onChange={handleWardenCountChange}
+        />
+      )}
+
+      {/* Render content below the dropdown when "No" is selected */}
+      {!wardenPresent && (
+        <div>
+          {/* Add content here to be displayed when "No" is selected */}
+          <p>No warden is present.</p>
+        </div>
+      )}
       <hr />
     </>
   );

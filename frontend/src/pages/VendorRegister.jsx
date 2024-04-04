@@ -1,10 +1,12 @@
 import MyButton from "../components/MyButton";
 import VendorNav from "../components/VendorNav";
+
 import {
   MDBContainer,
   MDBBtn,
   MDBRow,
   MDBCol,
+  MDBIcon,
   MDBInput,
   MDBRadio,
 } from "mdb-react-ui-kit";
@@ -16,16 +18,34 @@ import TiffinVen from "../components/TiffinVen";
 
 const VendorRegister = () => {
   const [selectedType, setSelectedType] = useState(""); // State to store selected type
+  const [documents, setDocuments] = useState([]);
+
+  const handleDocumentUpload = (selectedFiles) => {
+    setDocuments(selectedFiles);
+  };
+
+  const handleUploadDocuments = () => {
+    // Handle document upload logic here
+    console.log("Uploading documents:", documents);
+    // Clear documents state after upload if needed
+    setDocuments([]);
+  };
 
   const handleRadioChange = (e) => {
+    e.preventDefault(); // Prevent default form submission
     setSelectedType(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission
+    // Handle form submission logic here
   };
 
   return (
     <>
       <VendorNav />
       <MDBContainer style={{ marginTop: 40 }}>
-        <form>
+        <form onSubmit={handleSubmit}>
           <MDBRow>
             <MDBCol>
               <MDBInput id="form10Example1" label="Name" />
@@ -96,12 +116,10 @@ const VendorRegister = () => {
           </MDBRow>
 
           <hr />
-          <MyButton />
+          <MyButton onUpload={handleDocumentUpload} />
         </form>
-        {/* Center button within the form (unchanged) */}
-        <div className="d-flex justify-content-center mt-4">
-          <MDBBtn rounded>Submit</MDBBtn>
-        </div>
+
+        <br />
       </MDBContainer>
     </>
   );

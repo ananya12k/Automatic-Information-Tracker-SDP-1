@@ -11,7 +11,26 @@ import {
 } from "mdb-react-ui-kit";
 
 const HostelPGVen = () => {
+  const [documents, setDocuments] = useState([]);
+
+  const handleDocumentUpload = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+    const filteredFiles = selectedFiles.filter((file) => {
+      const fileType = file.type;
+      return (
+        fileType === "image/jpeg" ||
+        fileType === "image/jpg" ||
+        fileType === "image/png"
+      );
+    });
+    setDocuments(filteredFiles);
+  };
+
   const [sharedRooms, setSharedRooms] = useState(false);
+
+  const handleSharedRoomsChange = () => {
+    setSharedRooms(!sharedRooms);
+  };
   const [roommates, setRoommates] = useState([]);
   const [acRoom, setAcRoom] = useState(false);
   const [foodIncluded, setFoodIncluded] = useState(false);
@@ -62,21 +81,24 @@ const HostelPGVen = () => {
 
   return (
     <>
+      <hr />
       <MDBDropdown>
-        <MDBDropdownToggle caret color="primary">
+        <MDBDropdownToggle caret={true.toString()} color="primary">
           {sharedRooms ? "Shared Rooms" : "Individual Rooms"}
         </MDBDropdownToggle>
         <MDBDropdownMenu>
-          <MDBDropdownItem onClick={() => setSharedRooms(false)}>
-            Individual Rooms
-          </MDBDropdownItem>
-          <MDBDropdownItem onClick={() => setSharedRooms(true)}>
-            Shared Rooms
+          <MDBDropdownItem onClick={handleSharedRoomsChange}>
+            {sharedRooms ? "Individual Rooms" : "Shared Rooms"}
           </MDBDropdownItem>
         </MDBDropdownMenu>
       </MDBDropdown>
-
-      {sharedRooms && (
+      <hr />
+      {/* Render content based on sharedRooms state */}
+      {!sharedRooms ? (
+        <div>
+          <p>No shared rooms are available.</p>
+        </div>
+      ) : (
         <div>
           <h4>Select Number of Roommates:</h4>
           {[2, 3, 4, 5, 6].map((num) => (
@@ -89,26 +111,27 @@ const HostelPGVen = () => {
               onChange={handleRoommatesChange}
             />
           ))}
+          <hr />
         </div>
       )}
-
       <MDBCheckbox
         label="AC Room"
         id="acRoom"
         checked={acRoom}
         onChange={() => setAcRoom(!acRoom)}
       />
-
+      <hr />
       <MDBInput
         type="text"
         label="Enter Price (₹)"
         value={selectedPrice}
         onChange={(e) => setSelectedPrice(e.target.value)}
       />
+      <hr />
       <MDBBtn color="primary" onClick={handleAddPrice}>
         Add Price
       </MDBBtn>
-
+      <hr />
       {prices.length > 0 && (
         <div>
           <h4>Prices:</h4>
@@ -119,9 +142,8 @@ const HostelPGVen = () => {
           ))}
         </div>
       )}
-
       <MDBDropdown>
-        <MDBDropdownToggle caret color="primary">
+        <MDBDropdownToggle caret={true.toString()} color="primary">
           {selectedCombination || "Select Combination"}
         </MDBDropdownToggle>
         <MDBDropdownMenu>
@@ -135,18 +157,18 @@ const HostelPGVen = () => {
           ))}
         </MDBDropdownMenu>
       </MDBDropdown>
-
+      <hr />
       <MDBCheckbox
         label="Food Included"
         id="foodIncluded"
         checked={foodIncluded}
         onChange={() => setFoodIncluded(!foodIncluded)}
       />
-
+      <hr />
       <MDBInput type="textarea" label="Rules and Regulations" />
-
-      <MDBInput type="time" label="In-Time" />
-
+      <hr />
+      In-Time: <MDBInput type="time" />
+      <hr />
       <h4>Select Amenities:</h4>
       {[
         "Wifi",
@@ -174,15 +196,29 @@ const HostelPGVen = () => {
       ].map((amenity) => (
         <MDBCheckbox label={amenity} id={amenity} key={amenity} />
       ))}
-
       <MDBCheckbox label="Pick and Drop" id="pickAndDrop" />
       <MDBCheckbox label="Police Verification" id="policeVerification" />
-
-      <MDBBtn color="primary">
+      <hr />
+      <MDBBtn
+        color="primary"
+        onClick={() => {
+          document.getElementById("documentUpload").click();
+        }}
+      >
         <MDBIcon fas icon="upload" /> Upload Images
       </MDBBtn>
-
+      {/* Input element for file upload */}
+      <input
+        type="file"
+        accept=".jpg, .jpeg, .png, .pdf, .docx"
+        multiple
+        onChange={handleDocumentUpload}
+        style={{ display: "none" }}
+        id="documentUpload"
+      />
+      <hr />
       <MDBInput type="text" label="Longitude" />
+      <hr />
       <MDBInput type="text" label="Latitude" />
     </>
   );
