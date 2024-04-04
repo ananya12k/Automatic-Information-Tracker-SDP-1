@@ -72,7 +72,7 @@ const VendorRegister = () => {
     setSelectedType(e.target.value);
   };
   const navigate = useNavigate();
-  const handleSubmit = async (e, selectedType, documents) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       let formData;
@@ -83,7 +83,7 @@ const VendorRegister = () => {
             email: document.getElementById("form10Example2").value,
             phoneNumber: document.getElementById("form10Example3").value,
             address: document.getElementById("form10Example4").value,
-            type: selectedType,
+            type: selectedType, // Include the selectedType in the form data
             hostelData: hostelData,
             hostelPGData: hostelPGData,
             documents: documents.map((file) => ({
@@ -99,7 +99,7 @@ const VendorRegister = () => {
             email: document.getElementById("form10Example2").value,
             phoneNumber: document.getElementById("form10Example3").value,
             address: document.getElementById("form10Example4").value,
-            type: selectedType,
+            type: selectedType, // Include the selectedType in the form data
             hostelPGData: hostelPGData,
             pgData: {
               depositOptions: getDepositOptions(),
@@ -118,7 +118,7 @@ const VendorRegister = () => {
             email: document.getElementById("form10Example2").value,
             phoneNumber: document.getElementById("form10Example3").value,
             address: document.getElementById("form10Example4").value,
-            type: selectedType,
+            type: selectedType, // Include the selectedType in the form data
             tiffinData: tiffinData,
             documents: documents.map((file) => ({
               name: file.name,
@@ -127,12 +127,12 @@ const VendorRegister = () => {
             })),
           };
           break;
-
         default:
           console.error("Invalid vendor type");
           return;
       }
 
+      // Send the form data to the backend
       const response = await fetch("http://127.0.0.1:8000/service/register/", {
         method: "POST",
         headers: {
@@ -151,6 +151,7 @@ const VendorRegister = () => {
       console.error("Error:", error.message);
     }
   };
+
   const getDepositOptions = () => {
     const depositOptions = [];
     const rent1 = document.getElementById("radio1Rent").checked;
@@ -275,10 +276,7 @@ const VendorRegister = () => {
                         <img
                           src={URL.createObjectURL(file)}
                           alt={`Preview ${index}`}
-                          style={{
-                            maxWidth: "100px",
-                            maxHeight: "100px",
-                          }}
+                          style={{ maxWidth: "100px", maxHeight: "100px" }}
                         />
                         <MDBIcon
                           icon="trash-alt"
@@ -304,7 +302,6 @@ const VendorRegister = () => {
               </ul>
             </div>
           )}
-
           <hr />
         </form>
         <div className="d-flex justify-content-center mt-4">

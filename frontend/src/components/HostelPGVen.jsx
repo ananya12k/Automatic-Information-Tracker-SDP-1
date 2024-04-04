@@ -293,7 +293,7 @@ const HostelPGVen = ({ onHostelPGData }) => {
       <hr />
       {documents.length > 0 && (
         <div>
-          <h4>Uploaded Documents:</h4>
+          <h4>Uploaded Photos:</h4>
           <ul>
             {documents.map((file, index) => (
               <li key={index}>
