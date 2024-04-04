@@ -1,151 +1,98 @@
-import { useState } from "react";
-import PropTypes from "prop-types"; // Import PropTypes
-import { MDBBtn, MDBIcon, MDBTooltip, MDBRadio } from "mdb-react-ui-kit";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { MDBBtn, MDBIcon, MDBTooltip, MDBRadio, MDBInput } from "mdb-react-ui-kit";
 
 const TiffinVen = ({ onTiffinData }) => {
-  // Step 1: Define onTiffinData prop
-  const [menu, setMenu] = useState(null);
-  const [menuPreview, setMenuPreview] = useState(null);
-  const [isVegetarian, setIsVegetarian] = useState(null);
-  const [isDeliveryAvailable, setIsDeliveryAvailable] = useState(null);
+ const [vegNonVeg, setVegNonVeg] = useState("V"); // Default to Veg
+ const [deliversToLoc, setDeliversToLoc] = useState("Delivering Location");
+ const [opensAt, setOpensAt] = useState("00:00:00");
+ const [closesAt, setClosesAt] = useState("00:00:00");
+ const [menuFile, setMenuFile] = useState(null);
+ const [menuPreview, setMenuPreview] = useState(null);
 
-  const handleMenuUpload = (e) => {
+ const handleMenuUpload = (e) => {
     const selectedFile = e.target.files[0];
-    setMenu(selectedFile);
+    setMenuFile(selectedFile);
     setMenuPreview(URL.createObjectURL(selectedFile));
-  };
+ };
 
-  const handleDeleteMenu = () => {
-    setMenu(null);
+ const handleDeleteMenu = () => {
+    setMenuFile(null);
     setMenuPreview(null);
-  };
+ };
 
-  const handleUploadMenu = () => {
-    // Logic to handle menu upload
-    console.log("Uploading menu:", menu);
-
+ const handleSubmit = () => {
     // Call the onTiffinData function with the tiffin-specific data
     onTiffinData({
-      menu: menu,
-      menuPreview: menuPreview,
+   
+      
+      type_of_food: vegNonVeg,
+      // menu: menuFile,
+      delivers_to_loc: deliversToLoc,
+      OpensAt: opensAt,
+      ClosesAt: closesAt,
+      // longitude: 12.9716, // This should be dynamically set based on user input
+      // latitude: 77.5946, // This should be dynamically set based on user input
     });
+ };
 
-    // Reset the menu state after upload if needed
-    setMenu(null);
-    setMenuPreview(null);
-  };
-
-  const handleSubmit = () => {
-    // Call the onTiffinData function with the tiffin-specific data
-    onTiffinData({
-      isVegetarian: isVegetarian,
-      isDeliveryAvailable: isDeliveryAvailable,
-      // Include any other relevant data from TiffinVen component
-    });
-  };
-
-  return (
+ return (
     <>
+      {/* Form fields for name, email, address, longitude, latitude, and other required fields */}
       <hr />
-      <h5>Vegetarian</h5>
+      <h5>Veg/Non-Veg</h5>
       <MDBRadio
-        name="veg"
+        name="vegNonVeg"
         id="Veg"
-        label="Yes"
+        label="Veg"
         inline
-        checked={isVegetarian === true}
-        onChange={() => setIsVegetarian(true)}
+        checked={vegNonVeg === "V"}
+        onChange={() => setVegNonVeg("V")}
       />
       <MDBRadio
-        name="veg"
+        name="vegNonVeg"
         id="NonVeg"
-        label="No"
+        label="Non-Veg"
         inline
-        checked={isVegetarian === false}
-        onChange={() => setIsVegetarian(false)}
+        checked={vegNonVeg === "NV"}
+        onChange={() => setVegNonVeg("NV")}
       />
       <hr />
-      <h5>Delivery</h5>
-      <MDBRadio
-        name="delivery"
-        id="delivery1"
-        label="Yes"
-        inline
-        checked={isDeliveryAvailable === true}
-        onChange={() => setIsDeliveryAvailable(true)}
+      <h5>Delivering Location</h5>
+      <MDBInput
+        type="text"
+        label="Delivering Location"
+        value={deliversToLoc}
+        onChange={(e) => setDeliversToLoc(e.target.value)}
       />
-      <MDBRadio
-        name="delivery"
-        id="delivery2"
-        label="No"
-        inline
-        checked={isDeliveryAvailable === false}
-        onChange={() => setIsDeliveryAvailable(false)}
+      <hr />
+      <h5>Opening Time</h5>
+      <MDBInput
+        type="time"
+        label="Opening Time"
+        value={opensAt}
+        onChange={(e) => setOpensAt(e.target.value)}
       />
-      <span className="d-flex justify-content-center mt-4">
-        <MDBBtn rounded style={{ marginRight: 10 }}>
-          <label htmlFor="menuUpload" style={{ cursor: "pointer" }}>
-            <MDBIcon fas icon="upload" style={{ marginRight: 5 }} />
-            Upload Menu
-            <input
-              type="file"
-              accept=".pdf, .docx, .jpg, .jpeg, .png"
-              onChange={handleMenuUpload}
-              style={{ display: "none" }}
-              id="menuUpload"
-            />
-          </label>
-        </MDBBtn>
-        <MDBTooltip
-          tag="span"
-          placement="right"
-          title="Upload the weekly menu with quantity, price, and delivery timings"
-        >
-          <MDBIcon fas icon="info-circle" />
-        </MDBTooltip>
-      </span>
-      {menu && (
-        <div>
-          {menu.type.startsWith("image/") ? (
-            <div>
-              <img
-                src={menuPreview}
-                alt="Menu Preview"
-                style={{ maxWidth: "100%" }}
-              />
-              <MDBIcon
-                far
-                icon="trash-alt"
-                className="ml-2"
-                style={{ cursor: "pointer" }}
-                onClick={handleDeleteMenu}
-              />
-            </div>
-          ) : (
-            <div>
-              <hr />
-              <p>Uploaded Menu: {menu.name}</p>
-              <MDBIcon
-                far
-                icon="trash-alt"
-                className="ml-2"
-                style={{ cursor: "pointer" }}
-                onClick={handleDeleteMenu}
-              />
-            </div>
-          )}
-        </div>
-      )}
+      <hr />
+      <h5>Closing Time</h5>
+      <MDBInput
+        type="time"
+        label="Closing Time"
+        value={closesAt}
+        onChange={(e) => setClosesAt(e.target.value)}
+      />
+      <hr />
       <div className="d-flex justify-content-center mt-4">
         <MDBBtn rounded onClick={handleSubmit}>
           Submit
         </MDBBtn>
       </div>
     </>
-  );
+ );
 };
+
 TiffinVen.propTypes = {
-  onTiffinData: PropTypes.func.isRequired, // Step 3: PropTypes validation for onTiffinData prop
+ onTiffinData: PropTypes.func.isRequired,
 };
 
 export default TiffinVen;
