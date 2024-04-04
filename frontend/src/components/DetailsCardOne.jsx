@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
-const DetailsCardOne = () => {
+const DetailsCardOne = ({ hostel }) => {
 
     const [isHovered, setIsHovered] = useState(false);
     const [isButtonHovered, setIsButtonHovered] = useState(false);
-
-    const amenities = ['Free Wi-Fi', 'Air Conditioning', '24-hour Security', 'Laundry Service', 'Gyser', 'Two Wheeler Parking'];
-
+    
+    const amenitiesArray = hostel && typeof hostel.amentities === 'string' ? hostel.amentities.split(',') : [];
+    console.log(amenitiesArray);
+    
     const baseStyle = {
         cursor: 'pointer',
         width: '90%',
@@ -45,9 +46,9 @@ const DetailsCardOne = () => {
 
     const amenityItemStyle = {
         padding: '10px 0',
-        flexBasis: 'calc(33.333% - 10px)', 
-        boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)', 
-        borderRadius: '5px', 
+        flexBasis: 'calc(33.333% - 10px)',
+        boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
+        borderRadius: '5px',
         marginBottom: '10px',
     };
 
@@ -59,7 +60,7 @@ const DetailsCardOne = () => {
         >
             <h2 style={titleStyle}>Amenities Provided </h2>
             <ul style={amenitiesListStyle}>
-                {amenities.map((amenity, index) => (
+                {amenitiesArray.map((amenity, index) => (
                     <li key={index} style={amenityItemStyle}>
                         <div style={{ padding: '20px' }}>{amenity}</div>
                     </li>
