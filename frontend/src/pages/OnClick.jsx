@@ -13,6 +13,9 @@ const images = [
   'https://mdbootstrap.com/img/new/slides/041.jpg',
   'https://mdbootstrap.com/img/new/slides/042.jpg',
   'https://mdbootstrap.com/img/new/slides/043.jpg',
+  'https://mdbootstrap.com/img/new/slides/043.jpg',
+  'https://mdbootstrap.com/img/new/slides/043.jpg',
+  'https://mdbootstrap.com/img/new/slides/043.jpg',
 ];
 
 export default function OnClick(props) {

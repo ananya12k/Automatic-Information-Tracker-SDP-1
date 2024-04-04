@@ -39,6 +39,7 @@ const HostelBoys = () => {
           type={hostel.Type}
           latitude={hostel.Latitude}
           longitude={hostel.Longitude}
+          amentities = {hostel.Amentities}
         />
       ))}
     </>
