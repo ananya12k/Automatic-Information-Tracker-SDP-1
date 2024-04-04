@@ -119,10 +119,13 @@ const HostelPGVen = ({ onHostelPGData }) => {
   //   });
   //   return selectedAmenities;
   // };
-
+  const [forBoys, setForBoys] = useState(false);
+  const [forGirls, setForGirls] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
     const hostelPGData = {
+      forBoys,
+      forGirls,
       documents,
       sharedRooms,
       roommates,
@@ -147,6 +150,20 @@ const HostelPGVen = ({ onHostelPGData }) => {
 
   return (
     <>
+      <hr />
+      {/* Checkboxes for boy or girl */}
+      <MDBCheckbox
+        label="For Boys"
+        id="forBoysCheckbox"
+        checked={forBoys}
+        onChange={() => setForBoys(!forBoys)}
+      />
+      <MDBCheckbox
+        label="For Girls"
+        id="forGirlsCheckbox"
+        checked={forGirls}
+        onChange={() => setForGirls(!forGirls)}
+      />
       <hr />
       <MDBDropdown>
         <MDBDropdownToggle caret={true.toString()} color="primary">

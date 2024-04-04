@@ -114,7 +114,6 @@ const HostelVen = (props) => {
       <MDBBtn rounded onClick={handleSubmit}>
         Add Warden Details
       </MDBBtn>
-      <hr />
     </>
   );
 };

@@ -65,10 +65,11 @@ const VendorRegister = () => {
   const handleHostelPGData = (data) => {
     // Handle the data received from HostelPGVen component
     console.log("Hostel/PG data:", data);
+    setHostelPGData(data); // Store the data in state
   };
 
   const handleRadioChange = (e) => {
-    e.preventDefault(); // Prevent default form submission
+    // e.preventDefault(); // Prevent default form submission
     setSelectedType(e.target.value);
   };
   const navigate = useNavigate();
@@ -303,12 +304,13 @@ const VendorRegister = () => {
             </div>
           )}
           <hr />
+          <div className="d-flex justify-content-center mt-4">
+            <MDBBtn rounded type="submit">
+              Submit
+            </MDBBtn>
+          </div>
         </form>
-        <div className="d-flex justify-content-center mt-4">
-          <MDBBtn rounded onClick={handleSubmit}>
-            Submit
-          </MDBBtn>
-        </div>
+
         <br />
       </MDBContainer>
     </>
