@@ -43,7 +43,7 @@ export default function OnClick(props) {
 
  return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <MDBCardText className="text-center fs-2 display-5" style={{ padding: "30px", fontFamily: "Arial, sans-serif", color: "#333" }}>
         {hostel ? hostel.name : 'not received'}
       </MDBCardText>

@@ -59,7 +59,7 @@ const AddressCard = ({ hostel }) => {
 
             <Backdrop show={showReviewModal} />
 
-            <ReviewModal isOpen={showReviewModal} setOpen={setShowReviewModal} />
+            <ReviewModal isOpen={showReviewModal} setOpen={setShowReviewModal} hostel={hostel}/>
         </>
     )
 }
