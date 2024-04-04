@@ -10,39 +10,6 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 
 const HostelVen = (props) => {
-  const [documents, setDocuments] = useState([]);
-
-  const handleDocumentUpload = (e) => {
-    const selectedFiles = Array.from(e.target.files);
-    const filteredFiles = selectedFiles.filter((file) => {
-      const fileType = file.type;
-      return (
-        fileType === "image/jpeg" ||
-        fileType === "image/jpg" ||
-        fileType === "image/png"
-      );
-    });
-    setDocuments((prevDocuments) => [...prevDocuments, ...filteredFiles]);
-  };
-
-  const handleDeleteDocument = (index) => {
-    setDocuments((prevDocuments) =>
-      prevDocuments.filter((_, i) => i !== index)
-    );
-  };
-
-  const getFileIcon = (fileName) => {
-    const extension = fileName.split(".").pop();
-    switch (extension.toLowerCase()) {
-      case "pdf":
-        return "fa-file-pdf";
-      case "docx":
-        return "fa-file-word";
-      default:
-        return "fa-file";
-    }
-  };
-
   const [wardenPresent, setWardenPresent] = useState(false);
   const [wardenCount, setWardenCount] = useState(0);
 

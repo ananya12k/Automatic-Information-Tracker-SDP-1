@@ -48,9 +48,9 @@ function App() {
           <Route path="/vendordash" element={<VendorDash />} />
           <Route path="/vendorreg" element={<VendorRegister />} />
           <Route path="/vendorprofile" element={<VendorProfilePage />} />
-          {/* <Route path="/review" element={<ReviewModal />} />
-          <Route path="/rating" element={<Rating />} /> */}
-          {/* <Route path="/userprofile" element={<UserProfile />} /> */}
+          <Route path="/review" element={<ReviewModal />} />
+          <Route path="/rating" element={<Rating />} />
+          <Route path="/userprofile" element={<UserProfile />} />
           <Route path="/details" element={<OnClick />} />
         </Routes>
       </Router>
