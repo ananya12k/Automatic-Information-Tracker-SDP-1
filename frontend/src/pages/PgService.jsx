@@ -48,6 +48,7 @@ const PgService = () => {
           type={x.Type}
           latitude={x.Latitude}
           longitude={x.Longitude}
+          amentities = {x.Amentities}
         />
       ))}
     </>

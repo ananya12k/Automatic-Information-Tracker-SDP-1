@@ -52,6 +52,7 @@ const HostelGirls = () => {
             latitude={hostel.Latitude}
             longitude={hostel.Longitude}
             type={hostel.Type}
+            amentities = {hostel.Amentities}
 
           />
         ))
