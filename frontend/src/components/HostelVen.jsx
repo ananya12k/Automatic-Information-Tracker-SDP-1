@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { MDBBtn, MDBIcon, MDBTooltip, MDBRadio, MDBInput } from "mdb-react-ui-kit";
-
+import {
+  MDBBtn,
+  MDBIcon,
+  MDBTooltip,
+  MDBRadio,
+  MDBInput,
+} from "mdb-react-ui-kit";
 
 const HostelVen = ({ onHostelData }) => {
   const [roomType, setRoomType] = useState("");
@@ -16,43 +21,106 @@ const HostelVen = ({ onHostelData }) => {
   const [securityPresent, setSecurityPresent] = useState("");
   const [forGender, setForGender] = useState("");
   const [rules, setRules] = useState("");
- 
+
   const handleSubmit = () => {
-     const hostelData = {
-       room_type: roomType,
-       room_shared: roomShared,
-       amenities: amenities,
-       in_time: inTime,
-       warden_present: wardenPresent,
-       no_of_wardens: noOfWardens,
-       food_included: foodIncluded,
-       longitude: longitude,
-       latitude: latitude,
-       security_present: securityPresent,
-       for_gender: forGender,
-       rules: rules,
-     };
-     console.log(hostelData);
-     onHostelData(hostelData);
+    const hostelData = {
+      room_type: roomType,
+      room_shared: roomShared,
+      amenities: amenities,
+      in_time: inTime,
+      warden_present: wardenPresent,
+      no_of_wardens: noOfWardens,
+      food_included: foodIncluded,
+      longitude: longitude,
+      latitude: latitude,
+      security_present: securityPresent,
+      for_gender: forGender,
+      rules: rules,
+    };
+    console.log(hostelData);
+    onHostelData(hostelData);
   };
- 
+
   return (
-     <>
-       <MDBInput label="Room Type" value={roomType} onChange={(e) => setRoomType(e.target.value)} />
-       <MDBInput label="Room Shared" value={roomShared} onChange={(e) => setRoomShared(e.target.value)} />
-       <MDBInput label="Amenities" value={amenities} onChange={(e) => setAmenities(e.target.value)} />
-       <MDBInput label="In Time" type="time" value={inTime} onChange={(e) => setInTime(e.target.value)} />
-       <MDBInput label="Warden Present" value={wardenPresent} onChange={(e) => setWardenPresent(e.target.value)} />
-       <MDBInput label="No of Wardens" value={noOfWardens} onChange={(e) => setNoOfWardens(e.target.value)} />
-       <MDBInput label="Food Included" value={foodIncluded} onChange={(e) => setFoodIncluded(e.target.value)} />
-       <MDBInput label="Longitude" value={longitude} onChange={(e) => setLongitude(e.target.value)} />
-       <MDBInput label="Latitude" value={latitude} onChange={(e) => setLatitude(e.target.value)} />
-       <MDBInput label="Security Present" value={securityPresent} onChange={(e) => setSecurityPresent(e.target.value)} />
-       <MDBInput label="For Gender" value={forGender} onChange={(e) => setForGender(e.target.value)} />
-       <MDBInput label="Rules" value={rules} onChange={(e) => setRules(e.target.value)} />
-       <MDBBtn rounded onClick={handleSubmit}>Submit</MDBBtn>
-     </>
+    <>
+      <MDBInput
+        label="Room Type"
+        value={roomType}
+        onChange={(e) => setRoomType(e.target.value)}
+      />
+      <hr />
+      <MDBInput
+        label="Room Shared"
+        value={roomShared}
+        onChange={(e) => setRoomShared(e.target.value)}
+      />
+      <hr />
+      <MDBInput
+        label="Amenities"
+        value={amenities}
+        onChange={(e) => setAmenities(e.target.value)}
+      />
+      <hr />
+      <MDBInput
+        label="In Time"
+        type="time"
+        value={inTime}
+        onChange={(e) => setInTime(e.target.value)}
+      />
+      <hr />
+      <MDBInput
+        label="Warden Present"
+        value={wardenPresent}
+        onChange={(e) => setWardenPresent(e.target.value)}
+      />
+      <hr />
+      <MDBInput
+        label="No of Wardens"
+        value={noOfWardens}
+        onChange={(e) => setNoOfWardens(e.target.value)}
+      />
+      <hr />
+      <MDBInput
+        label="Food Included"
+        value={foodIncluded}
+        onChange={(e) => setFoodIncluded(e.target.value)}
+      />
+      <hr />
+      <MDBInput
+        label="Longitude"
+        value={longitude}
+        onChange={(e) => setLongitude(e.target.value)}
+      />
+      <hr />
+      <MDBInput
+        label="Latitude"
+        value={latitude}
+        onChange={(e) => setLatitude(e.target.value)}
+      />
+      <hr />
+      <MDBInput
+        label="Security Present"
+        value={securityPresent}
+        onChange={(e) => setSecurityPresent(e.target.value)}
+      />
+      <hr />
+      <MDBInput
+        label="For Gender"
+        value={forGender}
+        onChange={(e) => setForGender(e.target.value)}
+      />
+      <hr />
+      <MDBInput
+        label="Rules"
+        value={rules}
+        onChange={(e) => setRules(e.target.value)}
+      />
+      <hr />
+      <MDBBtn rounded onClick={handleSubmit}>
+        Submit
+      </MDBBtn>
+    </>
   );
- };
- 
- export default HostelVen;
+};
+
+export default HostelVen;

@@ -13,15 +13,15 @@ import HostelPGVen from "../components/HostelPGVen";
 import TiffinVen from "../components/TiffinVen";
 
 const VendorRegister = () => {
- const [selectedType, setSelectedType] = useState("");
- const [hostelData, setHostelData] = useState(null);
- const [hostelPGData, setHostelPGData] = useState(null);
- const [tiffinData, setTiffinData] = useState(null);
- const [name, setName] = useState("");
- const [email, setEmail] = useState("");
- const [phone, setPhone] = useState("");
- const [address, setAddress] = useState("");
- const navigate = useNavigate();
+  const [selectedType, setSelectedType] = useState("");
+  const [hostelData, setHostelData] = useState(null);
+  const [hostelPGData, setHostelPGData] = useState(null);
+  const [tiffinData, setTiffinData] = useState(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,22 +65,41 @@ const VendorRegister = () => {
       <form onSubmit={handleSubmit}>
         <MDBRow>
           <MDBCol>
-            <MDBInput label="Name" value={name} onChange={(e) => setName(e.target.value)} />
+            <MDBInput
+              label="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </MDBCol>
           <MDBCol>
-            <MDBInput label="Email address" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <MDBInput
+              label="Email address"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </MDBCol>
         </MDBRow>
-        
+        <hr />
+
         <MDBRow>
           <MDBCol>
-            <MDBInput label="Phone Number" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
+            <MDBInput
+              label="Phone Number"
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
           </MDBCol>
           <MDBCol>
-            <MDBInput label="Address" value={address} onChange={(e) => setAddress(e.target.value)} />
+            <MDBInput
+              label="Address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
           </MDBCol>
         </MDBRow>
-       
+        <hr />
         <MDBRow>
           <MDBCol>
             <MDBRadio
@@ -104,7 +123,9 @@ const VendorRegister = () => {
               checked={selectedType === "Pg"}
               onChange={(e) => setSelectedType(e.target.value)}
             />
-            {selectedType === "Pg" && (<HostelPGVen onHostelPGData={setHostelPGData} />)}
+            {selectedType === "Pg" && (
+              <HostelPGVen onHostelPGData={setHostelPGData} />
+            )}
           </MDBCol>
           <MDBCol>
             <MDBRadio
@@ -119,8 +140,10 @@ const VendorRegister = () => {
             {selectedType === "T" && <TiffinVen onTiffinData={setTiffinData} />}
           </MDBCol>
         </MDBRow>
-    
-        <MDBBtn rounded type="submit">Submit</MDBBtn>
+        <hr />
+        <MDBBtn rounded type="submit">
+          Submit
+        </MDBBtn>
       </form>
     </MDBContainer>
   );
